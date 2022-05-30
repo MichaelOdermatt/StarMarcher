@@ -3,40 +3,63 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 public class Shape : MonoBehaviour
 {
-    public List<Transform> _controlPoints;
+    public List<Transform> controlPoints;
+    private LineRenderer _lineRenderer;
+    private Vector3[] _linePositions;
+
+    public float lineWidth;
 
     private void Start()
     {
-        _controlPoints = OrderPointsByAngle(_controlPoints);
-        DrawLineThroughPoints(_controlPoints);
-    }
-
-    private void DrawLineThroughPoints(List<Transform> points)
-    {
-        LineRenderer lineRenderer = GetComponent<LineRenderer>();
-        if (lineRenderer == null)
+        controlPoints = OrderPointsByAngle(controlPoints);
+        if (controlPoints == null)
             return;
 
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
-        lineRenderer.useWorldSpace = true;
-        lineRenderer.loop = true;
-        lineRenderer.positionCount = points.Count;
-
-        List<Vector3> positions = new List<Vector3>();
-        foreach (var point in points)
-        { 
-            positions.Add(point.position);
-        }
-
-        lineRenderer.SetPositions(positions.ToArray());
-
+        InitializeLineRenderer();
+        _linePositions = new Vector3[controlPoints.Count];
     }
 
-    private List<Transform> OrderPointsByAngle(List<Transform> points)
+    private void Update()
     {
+        if (controlPoints == null)
+            return;
+
+        UpdateLinePositions(); 
+    }
+
+    private void InitializeLineRenderer()
+    {
+        _lineRenderer = GetComponent<LineRenderer>();
+
+        _lineRenderer.startWidth = lineWidth;
+        _lineRenderer.endWidth = lineWidth;
+        _lineRenderer.useWorldSpace = true;
+        _lineRenderer.loop = true;
+        if (controlPoints.Count > 0)
+            _lineRenderer.positionCount = controlPoints.Count;
+    }
+
+    private void UpdateLinePositions()
+    {
+        if (controlPoints.Count == 0)
+            return;
+
+        for (int i = 0; i < controlPoints.Count; i++)
+        {
+            _linePositions[i] = controlPoints[i].position;
+        }
+
+        _lineRenderer.SetPositions(_linePositions);
+    }
+
+    private static List<Transform> OrderPointsByAngle(List<Transform> points)
+    {
+        if (points.Count == 0)
+            return null;
+
         Transform rightMost = points[0];
         for (int i = 1; i < points.Count - 1; i++)
         {

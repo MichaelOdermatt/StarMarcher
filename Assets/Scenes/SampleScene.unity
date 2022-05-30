@@ -348,11 +348,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef68645fff17ac4fbb23a041bbbc53b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _controlPoints:
+  controlPoints:
   - {fileID: 456758052}
   - {fileID: 1641411105}
   - {fileID: 1564507854}
   - {fileID: 1801708253}
+  lineWidth: 0.1
 --- !u!4 &926315327
 Transform:
   m_ObjectHideFlags: 0
