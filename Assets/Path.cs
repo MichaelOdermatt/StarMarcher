@@ -13,7 +13,7 @@ public class Path : MonoBehaviour
     private int nextNode = 1;
     private int prevNode = 0;
     private float distanceAlongEdge = 0f;
-    private float movementSpeed = 0.05f;
+    private float movementSpeed = 0.5f;
 
     private void Start()
     {
@@ -29,5 +29,14 @@ public class Path : MonoBehaviour
         distanceAlongEdge += Time.deltaTime * movementSpeed;
         if (player.transform.position != nodes[nextNode].position)
             player.transform.position = Vector3.Lerp(nodes[prevNode].position, nodes[nextNode].position, distanceAlongEdge);
+        else
+        {
+            distanceAlongEdge = 0;
+            if (nextNode < nodes.Count - 1)
+            {
+                nextNode++;
+                prevNode++;
+            }
+        }
     }
 }
