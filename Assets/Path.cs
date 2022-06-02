@@ -9,7 +9,9 @@ public class Path : MonoBehaviour
     public List<Shape> shapes;
     private List<Transform> nodes;
 
-    private List<Transform> betweenNodes;
+    //private List<Transform> betweenNodes;
+    private int nextNode = 1;
+    private int prevNode = 0;
     private float distanceAlongEdge = 0f;
     private float movementSpeed = 0.05f;
 
@@ -20,16 +22,12 @@ public class Path : MonoBehaviour
         {
             nodes.AddRange(shape.controlPoints);
         }
-
-        betweenNodes = new List<Transform>();
-        betweenNodes.Add(nodes[0]);
-        betweenNodes.Add(nodes[1]);
     }
 
     private void Update()
     {
         distanceAlongEdge += Time.deltaTime * movementSpeed;
-        if (betweenNodes.Count > 0)
-            player.transform.position = Vector3.Lerp(betweenNodes[0].position, betweenNodes[1].position, distanceAlongEdge);
+        if (player.transform.position != nodes[nextNode].position)
+            player.transform.position = Vector3.Lerp(nodes[prevNode].position, nodes[nextNode].position, distanceAlongEdge);
     }
 }
