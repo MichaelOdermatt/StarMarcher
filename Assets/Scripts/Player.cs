@@ -52,13 +52,14 @@ public class Player : MonoBehaviour
 
     private void RotateAroundNode()
     {
+        if (!PlayerRigidBody.isKinematic)
+            PlayerRigidBody.velocity = Vector3.zero;
+            PlayerRigidBody.isKinematic = true;
+
         Angle += RotationSpeed * Time.deltaTime;
 
         var offset = new Vector3(Mathf.Sin(Angle), Mathf.Cos(Angle)) * Radius;
         transform.position = NodeTransform.position + offset;
-
-        if (!PlayerRigidBody.isKinematic)
-            PlayerRigidBody.isKinematic = true;
     }
 
     private void Launch()
