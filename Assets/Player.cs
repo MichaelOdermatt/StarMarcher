@@ -2,18 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
     private float RotationSpeed = 4f;
     private float Radius = 1f;
 
+    private float launchForce = 250f;
+    private Rigidbody2D PlayerRigidBody;
     public Transform nodeTransform;
     private float angle = 0;
+
+    private void Start()
+    {
+        PlayerRigidBody = GetComponent<Rigidbody2D>();
+    }
 
     private void Update()
     {
         if (nodeTransform != null)
+        {
             RotateAroundNode();
+            if (Input.GetButtonDown("Fire1"))
+                Launch();
+        }
+
     }
 
     private void RotateAroundNode()
@@ -22,5 +35,22 @@ public class Player : MonoBehaviour
 
         var offset = new Vector3(Mathf.Sin(angle), Mathf.Cos(angle)) * Radius;
         transform.position = nodeTransform.position + offset;
+
+        if (!PlayerRigidBody.isKinematic)
+            PlayerRigidBody.isKinematic = true;
     }
+
+    private void Launch()
+    {
+        Vector2 launchVector = CalculateLaunchVector();
+        nodeTransform = null;
+        PlayerRigidBody.isKinematic = false;
+        PlayerRigidBody.AddForce(launchVector * launchForce); 
+    }
+
+    private Vector2 CalculateLaunchVector()
+    {
+        return PlayerRigidBody.transform.position - nodeTransform.position;
+    }
+
 }
