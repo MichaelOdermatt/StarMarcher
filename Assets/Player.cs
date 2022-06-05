@@ -6,7 +6,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private float RotationSpeed = 4f;
-    private float Radius = 1f;
+    // Radius must be a little bigger than the radius of the node
+    // because a collision will occur with the node you are launching off
+    // if they are the same size.
+    private float Radius = 1.1f;
 
     private float launchForce = 250f;
     private Rigidbody2D PlayerRigidBody;
@@ -25,8 +28,7 @@ public class Player : MonoBehaviour
             RotateAroundNode();
             if (Input.GetButtonDown("Fire1"))
                 Launch();
-        }
-
+        } 
     }
 
     private void RotateAroundNode()
@@ -51,6 +53,14 @@ public class Player : MonoBehaviour
     private Vector2 CalculateLaunchVector()
     {
         return PlayerRigidBody.transform.position - nodeTransform.position;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (nodeTransform != null)
+            return;
+
+        nodeTransform = collision.collider.transform;
     }
 
 }
