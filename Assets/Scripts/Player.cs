@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
         var clickLocation = Camera.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(clickLocation, Vector2.zero);
 
-        if (hit == false)
+        if (hit == false || hit.collider.gameObject == gameObject)
             return;
 
         SetHinge(hit);
