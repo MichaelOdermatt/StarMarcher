@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 [RequireComponent(typeof(HingeJoint2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
@@ -16,11 +17,14 @@ public class Player : MonoBehaviour
     public Camera Camera;
     private float Angle = 0;
 
-    public HingeJoint2D Hinge;
+    private LineRenderer LineRenderer;
+    private HingeJoint2D Hinge;
 
     private void Start()
     {
         PlayerRigidBody = GetComponent<Rigidbody2D>();
+        LineRenderer = GetComponent<LineRenderer>();
+        LineRenderer.positionCount = 2;
         Hinge = GetComponent<HingeJoint2D>();
         Hinge.enabled = false;
     }
@@ -36,6 +40,8 @@ public class Player : MonoBehaviour
             else
                 UpdateHinge();
         }
+
+        UpdateLine();
     }
 
     private void FixedUpdate()
@@ -96,6 +102,12 @@ public class Player : MonoBehaviour
         Hinge.enabled = true;
         var node = hit.collider.gameObject;
         Hinge.anchor = transform.InverseTransformPoint(node.transform.position);
+    }
+
+    private void UpdateLine()
+    {
+        LineRenderer.SetPosition(0, transform.position);
+        LineRenderer.SetPosition(1, transform.TransformPoint(Hinge.anchor));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
