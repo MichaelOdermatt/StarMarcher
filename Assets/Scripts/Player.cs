@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(HingeJoint2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
@@ -9,44 +10,46 @@ public class Player : MonoBehaviour
     // if they are the same size.
     private float Radius = 1.1f;
 
-    private float launchForce = 250f;
+    private float LaunchForce = 250f;
     private Rigidbody2D PlayerRigidBody;
-    public Transform nodeTransform;
+    public Transform NodeTransform;
     public Camera Camera;
-    private float angle = 0;
+    private float Angle = 0;
 
-    public HingeJoint2D hinge;
+    public HingeJoint2D Hinge;
 
     private void Start()
     {
         PlayerRigidBody = GetComponent<Rigidbody2D>();
-        hinge.enabled = false;
+        Hinge = GetComponent<HingeJoint2D>();
+        Hinge.enabled = false;
     }
 
-    // TODO used fixed update instead
     private void Update()
     {
         bool clicked = Input.GetButtonDown("Fire1");
 
-        if (nodeTransform != null)
+        if (clicked)
         {
-            RotateAroundNode();
-            if (clicked)
+            if (NodeTransform != null)
                 Launch();
+            else
+                UpdateHinge();
         }
-        else
-        {
-            if (clicked)
-                HingeToNode();
-        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (NodeTransform != null)
+            RotateAroundNode();
     }
 
     private void RotateAroundNode()
     {
-        angle += RotationSpeed * Time.deltaTime;
+        Angle += RotationSpeed * Time.deltaTime;
 
-        var offset = new Vector3(Mathf.Sin(angle), Mathf.Cos(angle)) * Radius;
-        transform.position = nodeTransform.position + offset;
+        var offset = new Vector3(Mathf.Sin(Angle), Mathf.Cos(Angle)) * Radius;
+        transform.position = NodeTransform.position + offset;
 
         if (!PlayerRigidBody.isKinematic)
             PlayerRigidBody.isKinematic = true;
@@ -55,19 +58,19 @@ public class Player : MonoBehaviour
     private void Launch()
     {
         Vector2 launchVector = CalculateLaunchVector();
-        nodeTransform = null;
+        NodeTransform = null;
         PlayerRigidBody.isKinematic = false;
-        PlayerRigidBody.AddForce(launchVector * launchForce);
+        PlayerRigidBody.AddForce(launchVector * LaunchForce);
     }
 
     private Vector2 CalculateLaunchVector()
     {
-        return PlayerRigidBody.transform.position - nodeTransform.position;
+        return PlayerRigidBody.transform.position - NodeTransform.position;
     }
 
-    private void HingeToNode()
+    private void UpdateHinge()
     {
-        if (hinge.enabled == true)
+        if (Hinge.enabled == true)
         {
             RemoveHinge();
             return;
@@ -84,25 +87,25 @@ public class Player : MonoBehaviour
 
     private void RemoveHinge()
     {
-        hinge.anchor = Vector2.zero;
-        hinge.enabled = false;
+        Hinge.anchor = Vector2.zero;
+        Hinge.enabled = false;
     }
 
     private void SetHinge(RaycastHit2D hit)
     {
-        hinge.enabled = true;
+        Hinge.enabled = true;
         var node = hit.collider.gameObject;
-        hinge.anchor = transform.InverseTransformPoint(node.transform.position);
+        Hinge.anchor = transform.InverseTransformPoint(node.transform.position);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (nodeTransform != null)
+        if (NodeTransform != null)
             return;
 
-        if (hinge.enabled)
+        if (Hinge.enabled)
             RemoveHinge();
 
-        nodeTransform = collision.collider.transform;
+        NodeTransform = collision.collider.transform;
     }
 }
