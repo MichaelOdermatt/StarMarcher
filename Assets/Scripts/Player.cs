@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
-    private float RotationSpeed = 4f;
+    public float RotationSpeed = 4f;
     // Radius must be a little bigger than the radius of the node
     // because a collision will occur with the node you are launching off
     // if they are the same size.
@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
         Angle += RotationSpeed * Time.deltaTime;
 
         var offset = new Vector3(Mathf.Sin(Angle), Mathf.Cos(Angle)) * Radius;
-        transform.position = NodeTransform.position + offset;
+        PlayerRigidBody.transform.position = NodeTransform.position + offset;
     }
 
     private void Launch()
@@ -102,13 +102,13 @@ public class Player : MonoBehaviour
     {
         Hinge.enabled = true;
         var node = hit.collider.gameObject;
-        Hinge.anchor = transform.InverseTransformPoint(node.transform.position);
+        Hinge.anchor = PlayerRigidBody.transform.InverseTransformPoint(node.transform.position);
     }
 
     private void UpdateLine()
     {
-        LineRenderer.SetPosition(0, transform.position);
-        LineRenderer.SetPosition(1, transform.TransformPoint(Hinge.anchor));
+        LineRenderer.SetPosition(0, PlayerRigidBody.transform.position);
+        LineRenderer.SetPosition(1, PlayerRigidBody.transform.TransformPoint(Hinge.anchor));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -120,5 +120,15 @@ public class Player : MonoBehaviour
             RemoveHinge();
 
         NodeTransform = collision.collider.transform;
+
+        var playerVector = NodeTransform.InverseTransformPoint(PlayerRigidBody.transform.position);
+        Angle = Mathf.Deg2Rad * Angle360(playerVector, Vector2.up);
+    }
+
+    // https://answers.unity.com/questions/1164731/need-help-getting-angles-to-work-in-360-degrees.html
+    public static float Angle360(Vector2 from, Vector2 to)
+    {
+        float angle = Vector2.SignedAngle(from, to);
+        return angle < 0 ? 360 - angle * -1 : angle;
     }
 }
