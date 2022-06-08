@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
+    public float MinGrappleDistance = 1.1f;
     public float RotationSpeed = 4f;
     // Radius must be a little bigger than the radius of the node
     // because a collision will occur with the node you are launching off
@@ -86,7 +87,11 @@ public class Player : MonoBehaviour
         var clickLocation = Camera.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(clickLocation, Vector2.zero);
 
-        if (hit == false || hit.collider.gameObject == gameObject)
+        if (hit == false 
+            || hit.collider.gameObject == gameObject
+            || MinGrappleDistance >= Vector2.Distance(
+                hit.collider.transform.position, 
+                PlayerRigidBody.transform.position))
             return;
 
         SetHinge(hit);
