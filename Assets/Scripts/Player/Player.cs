@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(LineRenderer))]
 [RequireComponent(typeof(HingeJoint2D))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -18,11 +19,16 @@ public class Player : MonoBehaviour
     public Camera Camera;
     private float Angle = 0;
 
+    private PlayerInput PlayerInput;
+
     private LineRenderer LineRenderer;
     private HingeJoint2D Hinge;
 
-    private void Start()
+    private void Awake()
     {
+        PlayerInput = GetComponent<PlayerInput>();
+        PlayerInput.clicked += OnClicked;
+
         PlayerRigidBody = GetComponent<Rigidbody2D>();
         LineRenderer = GetComponent<LineRenderer>();
         LineRenderer.positionCount = 2;
@@ -32,16 +38,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        bool clicked = Input.GetButtonDown("Fire1");
-
-        if (clicked)
-        {
-            if (NodeTransform != null)
-                Launch();
-            else
-                UpdateHinge();
-        }
-
         UpdateLine();
     }
 
@@ -147,6 +143,14 @@ public class Player : MonoBehaviour
     private void OnCollisionWithObjective(Objective objective)
     {
         objective.Collect();
+    }
+
+    private void OnClicked(Vector3 clickLocation)
+    {
+        if (NodeTransform != null)
+            Launch();
+        else
+            UpdateHinge();
     }
 
     // https://answers.unity.com/questions/1164731/need-help-getting-angles-to-work-in-360-degrees.html
