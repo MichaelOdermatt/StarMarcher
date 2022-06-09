@@ -118,16 +118,34 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Component collider;
+
+        if (collision.collider.TryGetComponent(typeof(Node), out collider))
+            OnCollisionWithNode(collider);
+        else if (collision.collider.TryGetComponent(typeof(Objective), out collider))
+        {
+            OnCollisionWithObjective((Objective)collider);
+        }
+
+    }
+
+    private void OnCollisionWithNode(Component collider)
+    {
         if (NodeTransform != null)
             return;
 
         if (Hinge.enabled)
             RemoveHinge();
 
-        NodeTransform = collision.collider.transform;
+        NodeTransform = collider.gameObject.transform;
 
         var playerVector = NodeTransform.InverseTransformPoint(PlayerRigidBody.transform.position);
         Angle = Mathf.Deg2Rad * Angle360(playerVector, Vector2.up);
+    }
+
+    private void OnCollisionWithObjective(Objective objective)
+    {
+        objective.Collect();
     }
 
     // https://answers.unity.com/questions/1164731/need-help-getting-angles-to-work-in-360-degrees.html
