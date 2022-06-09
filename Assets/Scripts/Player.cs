@@ -118,14 +118,12 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Component collider;
+        Component component;
 
-        if (collision.collider.TryGetComponent(typeof(Node), out collider))
-            OnCollisionWithNode(collider);
-        else if (collision.collider.TryGetComponent(typeof(Objective), out collider))
-        {
-            OnCollisionWithObjective((Objective)collider);
-        }
+        if (collision.collider.TryGetComponent(typeof(Node), out component))
+            OnCollisionWithNode(component);
+        else if (collision.collider.TryGetComponent(typeof(Objective), out component))
+            OnCollisionWithObjective((Objective)component);
 
     }
 
