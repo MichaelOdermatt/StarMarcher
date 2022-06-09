@@ -232,6 +232,10 @@ PrefabInstance:
       propertyPath: Camera
       value: 
       objectReference: {fileID: 1975959737}
+    - target: {fileID: 8794081070398766267, guid: 171d2f299f072ad49b40fb7423eed413, type: 3}
+      propertyPath: m_EnableCollision
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 171d2f299f072ad49b40fb7423eed413, type: 3}
 --- !u!1001 &855991228
