@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8794081070398766215}
   - component: {fileID: 8794081070398766214}
-  - component: {fileID: 8794081070398766264}
   - component: {fileID: 8794081070398766265}
   - component: {fileID: 8794081070398766266}
   - component: {fileID: 8794081070398766267}
   - component: {fileID: 8794081070398766268}
+  - component: {fileID: 8794081070398766264}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -87,22 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8794081070398766264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8794081070398766213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be71229672822dc4a97e0f68f51dcab8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MinGrappleDistance: 1.1
-  RotationSpeed: 4
-  NodeTransform: {fileID: 0}
-  Camera: {fileID: 0}
 --- !u!50 &8794081070398766265
 Rigidbody2D:
   serializedVersion: 4
@@ -262,3 +246,18 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &8794081070398766264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8794081070398766213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be71229672822dc4a97e0f68f51dcab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinGrappleDistance: 1.1
+  RotationSpeed: 4
+  NodeTransform: {fileID: 0}

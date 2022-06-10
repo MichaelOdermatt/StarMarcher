@@ -6,17 +6,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
-    public float MinGrappleDistance = 1.1f;
     public float RotationSpeed = 4f;
     // Radius must be a little bigger than the radius of the node
     // because a collision will occur with the node you are launching off
     // if they are the same size.
     private float RotationRadius = 1.1f;
-
     private float LaunchForce = 250f;
+    private float Angle = 0;
+
     private Rigidbody2D PlayerRigidBody;
     public Transform NodeTransform;
-    private float Angle = 0;
 
     private PlayerInput PlayerInput;
     private PlayerGrapple PlayerGrapple;
