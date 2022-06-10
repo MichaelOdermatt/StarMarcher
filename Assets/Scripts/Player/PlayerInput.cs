@@ -8,8 +8,13 @@ using UnityEngine;
 /// </summary>
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] private Camera Camera;
+    private Camera Camera;
     public Action<Vector3> clicked;
+
+    private void Awake()
+    {
+        Camera = Camera.main;
+    }
 
     private void Update()
     {
