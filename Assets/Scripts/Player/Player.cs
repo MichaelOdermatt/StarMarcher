@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
             return;
 
         if (PlayerGrapple.IsEnabled)
-            PlayerGrapple.RemoveHinge();
+            PlayerGrapple.RemoveGrapple();
 
         NodeTransform = collider.gameObject.transform;
 
@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
         if (NodeTransform != null)
             Launch();
         else
-            PlayerGrapple.UpdateHinge(clickLocation);
+            PlayerGrapple.UpdateGrapple(clickLocation);
     }
 
     // https://answers.unity.com/questions/1164731/need-help-getting-angles-to-work-in-360-degrees.html

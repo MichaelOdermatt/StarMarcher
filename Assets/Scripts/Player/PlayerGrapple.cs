@@ -31,11 +31,11 @@ public class PlayerGrapple : MonoBehaviour
         Hinge.enabled = false;
     }
 
-    public void UpdateHinge(Vector3 clickLocation)
+    public void UpdateGrapple(Vector3 clickLocation)
     {
         if (Hinge.enabled == true)
         {
-            RemoveHinge();
+            RemoveGrapple();
             return;
         }
 
@@ -48,16 +48,16 @@ public class PlayerGrapple : MonoBehaviour
                 PlayerRigidBody.transform.position))
             return;
 
-        SetHinge(hit);
+        SetGrapple(hit);
     }
 
-    public void RemoveHinge()
+    public void RemoveGrapple()
     {
         Hinge.anchor = Vector2.zero;
         Hinge.enabled = false;
     }
 
-    public void SetHinge(RaycastHit2D hit)
+    public void SetGrapple(RaycastHit2D hit)
     {
         Hinge.enabled = true;
         var node = hit.collider.gameObject;
