@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Checks for player input.
+/// </summary>
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private Camera Camera;

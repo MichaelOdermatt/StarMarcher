@@ -1,9 +1,8 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerGrapple))]
 [RequireComponent(typeof(PlayerCollisions))]
 [RequireComponent(typeof(PlayerInput))]
-[RequireComponent(typeof(LineRenderer))]
-[RequireComponent(typeof(HingeJoint2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
@@ -12,22 +11,22 @@ public class Player : MonoBehaviour
     // Radius must be a little bigger than the radius of the node
     // because a collision will occur with the node you are launching off
     // if they are the same size.
-    private float Radius = 1.1f;
+    private float RotationRadius = 1.1f;
 
     private float LaunchForce = 250f;
     private Rigidbody2D PlayerRigidBody;
     public Transform NodeTransform;
-    public Camera Camera;
     private float Angle = 0;
 
     private PlayerInput PlayerInput;
+    private PlayerGrapple PlayerGrapple;
     private PlayerCollisions PlayerCollisions;
-
-    private LineRenderer LineRenderer;
-    private HingeJoint2D Hinge;
 
     private void Awake()
     {
+        PlayerGrapple = GetComponent<PlayerGrapple>();
+        PlayerGrapple.IsEnabled = false;
+
         PlayerCollisions = GetComponent<PlayerCollisions>();
         PlayerCollisions.CollisionWithNode += OnCollisionWithNode;
         PlayerCollisions.CollisionWithObjective += OnCollisionWithObjective;
@@ -36,15 +35,11 @@ public class Player : MonoBehaviour
         PlayerInput.clicked += OnClicked;
 
         PlayerRigidBody = GetComponent<Rigidbody2D>();
-        LineRenderer = GetComponent<LineRenderer>();
-        LineRenderer.positionCount = 2;
-        Hinge = GetComponent<HingeJoint2D>();
-        Hinge.enabled = false;
     }
 
     private void Update()
     {
-        UpdateLine();
+        PlayerGrapple.UpdateLine();
     }
 
     private void FixedUpdate()
@@ -61,7 +56,7 @@ public class Player : MonoBehaviour
 
         Angle += RotationSpeed * Time.deltaTime;
 
-        var offset = new Vector3(Mathf.Sin(Angle), Mathf.Cos(Angle)) * Radius;
+        var offset = new Vector3(Mathf.Sin(Angle), Mathf.Cos(Angle)) * RotationRadius;
         PlayerRigidBody.transform.position = NodeTransform.position + offset;
     }
 
@@ -78,53 +73,13 @@ public class Player : MonoBehaviour
         return PlayerRigidBody.transform.position - NodeTransform.position;
     }
 
-    private void UpdateHinge()
-    {
-        if (Hinge.enabled == true)
-        {
-            RemoveHinge();
-            return;
-        }
-
-        var clickLocation = Camera.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(clickLocation, Vector2.zero);
-
-        if (hit == false 
-            || hit.collider.gameObject == gameObject
-            || MinGrappleDistance >= Vector2.Distance(
-                hit.collider.transform.position, 
-                PlayerRigidBody.transform.position))
-            return;
-
-        SetHinge(hit);
-    }
-
-    private void RemoveHinge()
-    {
-        Hinge.anchor = Vector2.zero;
-        Hinge.enabled = false;
-    }
-
-    private void SetHinge(RaycastHit2D hit)
-    {
-        Hinge.enabled = true;
-        var node = hit.collider.gameObject;
-        Hinge.anchor = PlayerRigidBody.transform.InverseTransformPoint(node.transform.position);
-    }
-
-    private void UpdateLine()
-    {
-        LineRenderer.SetPosition(0, PlayerRigidBody.transform.position);
-        LineRenderer.SetPosition(1, PlayerRigidBody.transform.TransformPoint(Hinge.anchor));
-    }
-
     private void OnCollisionWithNode(Component collider)
     {
         if (NodeTransform != null)
             return;
 
-        if (Hinge.enabled)
-            RemoveHinge();
+        if (PlayerGrapple.IsEnabled)
+            PlayerGrapple.RemoveHinge();
 
         NodeTransform = collider.gameObject.transform;
 
@@ -145,7 +100,7 @@ public class Player : MonoBehaviour
         if (NodeTransform != null)
             Launch();
         else
-            UpdateHinge();
+            PlayerGrapple.UpdateHinge(clickLocation);
     }
 
     // https://answers.unity.com/questions/1164731/need-help-getting-angles-to-work-in-360-degrees.html

@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Checks for player collisions.
+/// </summary>
 public class PlayerCollisions : MonoBehaviour
 {
     public Action<Collider2D> CollisionWithObjective;
