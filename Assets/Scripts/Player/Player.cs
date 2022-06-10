@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerCollisions))]
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(LineRenderer))]
 [RequireComponent(typeof(HingeJoint2D))]
@@ -20,12 +21,17 @@ public class Player : MonoBehaviour
     private float Angle = 0;
 
     private PlayerInput PlayerInput;
+    private PlayerCollisions PlayerCollisions;
 
     private LineRenderer LineRenderer;
     private HingeJoint2D Hinge;
 
     private void Awake()
     {
+        PlayerCollisions = GetComponent<PlayerCollisions>();
+        PlayerCollisions.CollisionWithNode += OnCollisionWithNode;
+        PlayerCollisions.CollisionWithObjective += OnCollisionWithObjective;
+
         PlayerInput = GetComponent<PlayerInput>();
         PlayerInput.clicked += OnClicked;
 
@@ -112,20 +118,6 @@ public class Player : MonoBehaviour
         LineRenderer.SetPosition(1, PlayerRigidBody.transform.TransformPoint(Hinge.anchor));
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Node"))
-            OnCollisionWithNode(collision.collider);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        Component component;
-
-        if (collider.TryGetComponent(typeof(Objective), out component))
-            OnCollisionWithObjective((Objective)component);
-    }
-
     private void OnCollisionWithNode(Component collider)
     {
         if (NodeTransform != null)
@@ -140,9 +132,12 @@ public class Player : MonoBehaviour
         Angle = Mathf.Deg2Rad * Angle360(playerVector, Vector2.up);
     }
 
-    private void OnCollisionWithObjective(Objective objective)
+    private void OnCollisionWithObjective(Collider2D collider)
     {
-        objective.Collect();
+        var objective = collider.gameObject.GetComponent<Objective>();
+
+        if (objective != null)
+            objective.Collect();
     }
 
     private void OnClicked(Vector3 clickLocation)
