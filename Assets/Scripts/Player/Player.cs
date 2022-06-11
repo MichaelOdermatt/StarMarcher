@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
             return;
 
         if (PlayerGrapple.IsEnabled)
-            PlayerGrapple.RemoveGrapple();
+            PlayerGrapple.RemoveHinge();
 
         NodeTransform = collider.gameObject.transform;
 

@@ -11,6 +11,7 @@ using UnityEngine;
 public class PlayerGrapple : MonoBehaviour
 {
     public float MinGrappleDistance = 1.1f;
+    public float GrappleSpeed = 7;
 
     private Rigidbody2D PlayerRigidBody;
     private LineRenderer LineRenderer;
@@ -26,6 +27,7 @@ public class PlayerGrapple : MonoBehaviour
         PlayerRigidBody = GetComponent<Rigidbody2D>();
         LineRenderer = GetComponent<LineRenderer>();
         LineRenderer.positionCount = 2;
+        LineRenderer.enabled = false;
 
         Hinge = GetComponent<HingeJoint2D>();
         Hinge.enabled = false;
@@ -35,7 +37,7 @@ public class PlayerGrapple : MonoBehaviour
     {
         if (Hinge.enabled == true)
         {
-            RemoveGrapple();
+            RemoveHinge();
             return;
         }
 
@@ -48,25 +50,54 @@ public class PlayerGrapple : MonoBehaviour
                 PlayerRigidBody.transform.position))
             return;
 
-        SetGrapple(hit);
+        StartCoroutine(DrawGrapple(hit.collider.gameObject.transform.position, hit));
     }
 
-    public void RemoveGrapple()
+    public void RemoveHinge()
     {
+        DisableLineRenderer();
         Hinge.anchor = Vector2.zero;
         Hinge.enabled = false;
     }
 
-    public void SetGrapple(RaycastHit2D hit)
+    public void SetHinge(RaycastHit2D hit)
     {
         Hinge.enabled = true;
         var node = hit.collider.gameObject;
         Hinge.anchor = PlayerRigidBody.transform.InverseTransformPoint(node.transform.position);
     }
 
+    public IEnumerator DrawGrapple(Vector3 point, RaycastHit2D hit)
+    {
+        LineRenderer.enabled = true;
+
+        float time = 0;
+        Vector3 startPos = PlayerRigidBody.transform.position;
+
+        while (time < 1)
+        {
+            LineRenderer.SetPosition(1, Vector3.Lerp(startPos, point, time));
+            time += GrappleSpeed * Time.deltaTime;
+
+            yield return null;
+        }
+        LineRenderer.SetPosition(1, point);
+
+        SetHinge(hit);
+    }
+
     public void UpdateLine()
     {
-        LineRenderer.SetPosition(0, PlayerRigidBody.transform.position);
-        LineRenderer.SetPosition(1, PlayerRigidBody.transform.TransformPoint(Hinge.anchor));
+        if (LineRenderer.enabled)
+            LineRenderer.SetPosition(0, PlayerRigidBody.transform.position);
+    }
+
+    /// <summary>
+    /// It is reccomended that you use this rather than set LineRenderer.enabled = false.
+    /// </summary>
+    public void DisableLineRenderer()
+    {
+        LineRenderer.enabled = false;
+        LineRenderer.SetPositions(new[] { Vector3.zero, Vector3.zero });
     }
 }
