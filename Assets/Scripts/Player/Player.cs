@@ -6,13 +6,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
-    public float RotationSpeed = 4f;
+    public float RotationSpeed = 0f;
     // Radius must be a little bigger than the radius of the node
     // because a collision will occur with the node you are launching off
     // if they are the same size.
     private float RotationRadius = 1.1f;
-    private float LaunchForce = 250f;
+    private float LaunchMultiplier = 60f;
     private float Angle = 0;
+    private Vector3 VelocityBeforeCollision = Vector3.zero;
 
     private Rigidbody2D PlayerRigidBody;
     public Transform NodeTransform;
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        VelocityBeforeCollision = PlayerRigidBody.velocity;
         PlayerGrapple.UpdateLine();
     }
 
@@ -61,10 +63,10 @@ public class Player : MonoBehaviour
 
     private void Launch()
     {
-        Vector2 launchVector = CalculateLaunchVector();
+        Vector2 launchVector = CalculateLaunchVector().normalized;
         NodeTransform = null;
         PlayerRigidBody.isKinematic = false;
-        PlayerRigidBody.AddForce(launchVector * LaunchForce);
+        PlayerRigidBody.AddForce(launchVector * RotationSpeed * LaunchMultiplier);
     }
 
     private Vector2 CalculateLaunchVector()
@@ -80,6 +82,7 @@ public class Player : MonoBehaviour
         if (PlayerGrapple.IsEnabled)
             PlayerGrapple.RemoveHinge();
 
+        RotationSpeed = VelocityBeforeCollision.magnitude;
         NodeTransform = collider.gameObject.transform;
 
         var playerVector = NodeTransform.InverseTransformPoint(PlayerRigidBody.transform.position);

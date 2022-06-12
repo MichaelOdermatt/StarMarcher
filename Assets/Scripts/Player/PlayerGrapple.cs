@@ -81,8 +81,9 @@ public class PlayerGrapple : MonoBehaviour
 
             yield return null;
         }
-        LineRenderer.SetPosition(1, point);
 
+        // TODO fix bug where user hits a node before the line is fully drawn
+        LineRenderer.SetPosition(1, point);
         SetHinge(hit);
     }
 
