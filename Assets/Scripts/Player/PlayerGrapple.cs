@@ -60,10 +60,10 @@ public class PlayerGrapple : MonoBehaviour
         Hinge.enabled = false;
     }
 
-    public void SetHinge(RaycastHit2D hit)
+    public void SetHinge(GameObject node)
     {
         Hinge.enabled = true;
-        var node = hit.collider.gameObject;
+        //var node = hit.collider.gameObject;
         Hinge.anchor = PlayerRigidBody.transform.InverseTransformPoint(node.transform.position);
     }
 
@@ -85,7 +85,7 @@ public class PlayerGrapple : MonoBehaviour
         // TODO fix bug when the user clicks on a node again before the line is fully drawn
         // TODO fix bug where user hits a node before the line is fully drawn
         LineRenderer.SetPosition(1, point);
-        SetHinge(hit);
+        SetHinge(hit.collider.gameObject);
     }
 
     public void UpdateLine()
