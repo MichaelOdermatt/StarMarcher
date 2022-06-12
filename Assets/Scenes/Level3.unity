@@ -155,6 +155,7 @@ MonoBehaviour:
   Objectives:
   - {fileID: 1434105635}
   - {fileID: 1264089154}
+  LevelComplete: 0
 --- !u!4 &442717206
 Transform:
   m_ObjectHideFlags: 0
@@ -234,6 +235,14 @@ PrefabInstance:
       propertyPath: Camera
       value: 
       objectReference: {fileID: 1975959737}
+    - target: {fileID: 8794081070398766264, guid: 171d2f299f072ad49b40fb7423eed413, type: 3}
+      propertyPath: RotationSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794081070398766264, guid: 171d2f299f072ad49b40fb7423eed413, type: 3}
+      propertyPath: DecelerationAmount
+      value: 0.015
+      objectReference: {fileID: 0}
     - target: {fileID: 8794081070398766267, guid: 171d2f299f072ad49b40fb7423eed413, type: 3}
       propertyPath: m_EnableCollision
       value: 1

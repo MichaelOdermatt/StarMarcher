@@ -7,11 +7,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float RotationSpeed = 0f;
+    public float RotationSpeedMultiplier = 0.9f;
+    public float DecelerationAmount = 0.015f;
     // Radius must be a little bigger than the radius of the node
     // because a collision will occur with the node you are launching off
     // if they are the same size.
     private float RotationRadius = 1.1f;
-    private float LaunchMultiplier = 60f;
+    private float BaseLaunchForce = 200f;
+    private float LaunchMultiplier = 25f;
     private float Angle = 0;
     private Vector3 VelocityBeforeCollision = Vector3.zero;
 
@@ -56,6 +59,8 @@ public class Player : MonoBehaviour
             PlayerRigidBody.isKinematic = true;
 
         Angle += RotationSpeed * Time.deltaTime;
+        if (RotationSpeed > 0)
+            RotationSpeed -= DecelerationAmount;
 
         var offset = new Vector3(Mathf.Sin(Angle), Mathf.Cos(Angle)) * RotationRadius;
         PlayerRigidBody.transform.position = NodeTransform.position + offset;
@@ -66,7 +71,8 @@ public class Player : MonoBehaviour
         Vector2 launchVector = CalculateLaunchVector().normalized;
         NodeTransform = null;
         PlayerRigidBody.isKinematic = false;
-        PlayerRigidBody.AddForce(launchVector * RotationSpeed * LaunchMultiplier);
+        var launchForce = BaseLaunchForce + (RotationSpeed * LaunchMultiplier);
+        PlayerRigidBody.AddForce(launchVector * launchForce);
     }
 
     private Vector2 CalculateLaunchVector()
@@ -82,7 +88,7 @@ public class Player : MonoBehaviour
         if (PlayerGrapple.IsEnabled)
             PlayerGrapple.RemoveHinge();
 
-        RotationSpeed = VelocityBeforeCollision.magnitude;
+        RotationSpeed = VelocityBeforeCollision.magnitude * RotationSpeedMultiplier;
         NodeTransform = collider.gameObject.transform;
 
         var playerVector = NodeTransform.InverseTransformPoint(PlayerRigidBody.transform.position);
