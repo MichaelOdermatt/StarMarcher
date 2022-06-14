@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     private float Angle = 0;
     private Vector3 VelocityBeforeCollision = Vector3.zero;
 
+    private float NodeCollisionCameraShakeMagnitude = 0.025f;
+    private float NodeCollisionCameraShakeDuration = 0.2f;
+
     private Rigidbody2D PlayerRigidBody;
     public Transform NodeTransform;
 
@@ -93,6 +96,13 @@ public class Player : MonoBehaviour
 
         var playerVector = NodeTransform.InverseTransformPoint(PlayerRigidBody.transform.position);
         Angle = Mathf.Deg2Rad * Angle360(playerVector, Vector2.up);
+
+        var cameraShake = Camera.main.GetComponent<CameraShake>();
+        if (cameraShake != null)
+        {
+            var shakeMagnitude = NodeCollisionCameraShakeMagnitude * VelocityBeforeCollision.magnitude;
+            StartCoroutine(cameraShake.Shake(shakeMagnitude , NodeCollisionCameraShakeDuration));
+        }
     }
 
     private void OnCollisionWithObjective(Collider2D collider)
