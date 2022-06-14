@@ -13,6 +13,8 @@ public class PlayerGrapple : MonoBehaviour
     public float MinGrappleDistance = 1.1f;
     public float GrappleSpeed = 7;
 
+    private bool IsDrawingGrapple = false;
+
     private Rigidbody2D PlayerRigidBody;
     private LineRenderer LineRenderer;
     private HingeJoint2D Hinge;
@@ -50,7 +52,8 @@ public class PlayerGrapple : MonoBehaviour
                 PlayerRigidBody.transform.position))
             return;
 
-        StartCoroutine(DrawGrapple(hit.collider.gameObject.transform.position, hit));
+        if (!IsDrawingGrapple)
+            StartCoroutine(DrawGrapple(hit.collider.gameObject.transform.position, hit));
     }
 
     public void RemoveHinge()
@@ -68,6 +71,7 @@ public class PlayerGrapple : MonoBehaviour
 
     public IEnumerator DrawGrapple(Vector3 point, RaycastHit2D hit)
     {
+        IsDrawingGrapple = true;
         LineRenderer.enabled = true;
 
         float time = 0;
@@ -81,8 +85,8 @@ public class PlayerGrapple : MonoBehaviour
             yield return null;
         }
 
-        // TODO fix bug when the user clicks on a node again before the line is fully drawn
         // TODO fix bug where user hits a node before the line is fully drawn
+        IsDrawingGrapple = false;
         LineRenderer.SetPosition(1, point);
         SetHinge(hit.collider.gameObject);
     }
