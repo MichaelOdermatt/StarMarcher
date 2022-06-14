@@ -7,14 +7,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float RotationSpeed = 0f;
-    public float RotationSpeedMultiplier = 0.9f;
+    public float RotationSpeedMultiplier = 0.8f;
     public float DecelerationAmount = 0.015f;
+    public float BaseLaunchForce = 200f;
+    public float LaunchMultiplier = 25f;
     // Radius must be a little bigger than the radius of the node
     // because a collision will occur with the node you are launching off
     // if they are the same size.
     private float RotationRadius = 1.1f;
-    private float BaseLaunchForce = 200f;
-    private float LaunchMultiplier = 25f;
     private float Angle = 0;
     private Vector3 VelocityBeforeCollision = Vector3.zero;
 

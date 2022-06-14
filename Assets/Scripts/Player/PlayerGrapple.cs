@@ -63,7 +63,6 @@ public class PlayerGrapple : MonoBehaviour
     public void SetHinge(GameObject node)
     {
         Hinge.enabled = true;
-        //var node = hit.collider.gameObject;
         Hinge.anchor = PlayerRigidBody.transform.InverseTransformPoint(node.transform.position);
     }
 
