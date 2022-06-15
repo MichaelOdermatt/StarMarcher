@@ -91,6 +91,13 @@ public class Player : MonoBehaviour
         if (PlayerGrapple.IsEnabled)
             PlayerGrapple.RemoveHinge();
 
+        if (PlayerGrapple.IsDrawingGrapple)
+        {
+            //PlayerGrapple.IsDrawingGrapple = false;
+            PlayerGrapple.StopDrawThenSetGrapple();
+            PlayerGrapple.DisableLineRenderer();
+        }
+
         RotationSpeed = VelocityBeforeCollision.magnitude * RotationSpeedMultiplier;
         NodeTransform = collider.gameObject.transform;
 
@@ -118,7 +125,12 @@ public class Player : MonoBehaviour
         if (NodeTransform != null)
             Launch();
         else
-            PlayerGrapple.UpdateGrapple(clickLocation);
+        {
+            if (PlayerGrapple.IsEnabled)
+                PlayerGrapple.RemoveHinge();
+            else
+                PlayerGrapple.AttemptGrapple(clickLocation);
+        }
     }
 
     // https://answers.unity.com/questions/1164731/need-help-getting-angles-to-work-in-360-degrees.html

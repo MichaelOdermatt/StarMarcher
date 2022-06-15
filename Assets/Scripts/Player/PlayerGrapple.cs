@@ -13,7 +13,13 @@ public class PlayerGrapple : MonoBehaviour
     public float MinGrappleDistance = 1.1f;
     public float GrappleSpeed = 7;
 
-    private bool IsDrawingGrapple = false;
+    /// <summary>
+    /// If true, the a coroutine is running which is drawing the grapple,
+    /// then setting the hinge.
+    /// </summary>
+    public bool IsDrawingGrapple = false;
+
+    private Coroutine DrawThenSetGrappleCoroutine;
 
     private Rigidbody2D PlayerRigidBody;
     private LineRenderer LineRenderer;
@@ -35,14 +41,8 @@ public class PlayerGrapple : MonoBehaviour
         Hinge.enabled = false;
     }
 
-    public void UpdateGrapple(Vector3 clickLocation)
+    public void AttemptGrapple(Vector3 clickLocation)
     {
-        if (Hinge.enabled == true)
-        {
-            RemoveHinge();
-            return;
-        }
-
         RaycastHit2D hit = Physics2D.Raycast(clickLocation, Vector2.zero);
 
         if (hit == false 
@@ -53,7 +53,7 @@ public class PlayerGrapple : MonoBehaviour
             return;
 
         if (!IsDrawingGrapple)
-            StartCoroutine(DrawGrapple(hit.collider.gameObject.transform.position, hit));
+            DrawThenSetGrappleCoroutine = StartCoroutine(DrawThenSetGrapple(hit.collider.gameObject.transform.position, hit));
     }
 
     public void RemoveHinge()
@@ -63,13 +63,13 @@ public class PlayerGrapple : MonoBehaviour
         Hinge.enabled = false;
     }
 
-    public void SetHinge(GameObject node)
+    private void SetHinge(GameObject node)
     {
         Hinge.enabled = true;
         Hinge.anchor = PlayerRigidBody.transform.InverseTransformPoint(node.transform.position);
     }
 
-    public IEnumerator DrawGrapple(Vector3 point, RaycastHit2D hit)
+    private IEnumerator DrawThenSetGrapple(Vector3 point, RaycastHit2D hit)
     {
         IsDrawingGrapple = true;
         LineRenderer.enabled = true;
@@ -85,10 +85,19 @@ public class PlayerGrapple : MonoBehaviour
             yield return null;
         }
 
-        // TODO fix bug where user hits a node before the line is fully drawn
-        IsDrawingGrapple = false;
         LineRenderer.SetPosition(1, point);
         SetHinge(hit.collider.gameObject);
+
+        IsDrawingGrapple = false;
+    }
+
+    /// <summary>
+    /// Stops the coroutine which draws and sets the grapple.
+    /// </summary>
+    public void StopDrawThenSetGrapple()
+    {
+        StopCoroutine(DrawThenSetGrappleCoroutine);
+        IsDrawingGrapple = false;
     }
 
     public void UpdateLine()
