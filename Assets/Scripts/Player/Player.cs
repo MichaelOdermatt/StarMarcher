@@ -101,14 +101,10 @@ public class Player : MonoBehaviour
 
         NodeTransform = collider.gameObject.transform;
 
-        // get rotation dir
-        Vector2 playerAngle = VelocityBeforeCollision.normalized;
-        Vector2 circleAngle = CalculateLaunchVector().normalized;
+        Vector2 playerVelocity = VelocityBeforeCollision.normalized;
+        Vector2 fromNodeToPlayer = CalculateLaunchVector().normalized;
 
-        float dotProduct = Vector2.Dot(playerAngle, circleAngle);
-        float determinant = playerAngle.x * circleAngle.y + playerAngle.y * circleAngle.x;
-
-        var rotationDir = Mathf.Sign(Mathf.Atan2(determinant, dotProduct)) * -1;
+        var rotationDir = CalculateRotationDirection(playerVelocity, fromNodeToPlayer);
 
         RotationSpeed = (VelocityBeforeCollision.magnitude * RotationSpeedMultiplier) * rotationDir;
 
@@ -142,6 +138,17 @@ public class Player : MonoBehaviour
             else
                 PlayerGrapple.AttemptGrapple(clickLocation);
         }
+    }
+
+    private static int CalculateRotationDirection(Vector2 vec1, Vector2 vec2)
+    {
+        vec1.Normalize();        
+        vec2.Normalize();        
+
+        float dotProduct = Vector2.Dot(vec1, vec2);
+        float determinant = vec1.x * vec2.y + vec1.y * vec2.x;
+
+        return (int)Mathf.Sign(Mathf.Atan2(determinant, dotProduct)) * -1;
     }
 
     // https://answers.unity.com/questions/1164731/need-help-getting-angles-to-work-in-360-degrees.html
