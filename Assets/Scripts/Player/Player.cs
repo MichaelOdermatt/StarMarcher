@@ -64,6 +64,8 @@ public class Player : MonoBehaviour
         Angle += RotationSpeed * Time.deltaTime;
         if (RotationSpeed > 0)
             RotationSpeed -= DecelerationAmount;
+        else if (RotationSpeed < 0)
+            RotationSpeed += DecelerationAmount;
 
         var offset = new Vector3(Mathf.Sin(Angle), Mathf.Cos(Angle)) * RotationRadius;
         PlayerRigidBody.transform.position = NodeTransform.position + offset;
@@ -74,7 +76,7 @@ public class Player : MonoBehaviour
         Vector2 launchVector = CalculateLaunchVector().normalized;
         NodeTransform = null;
         PlayerRigidBody.isKinematic = false;
-        var launchForce = BaseLaunchForce + (RotationSpeed * LaunchMultiplier);
+        var launchForce = BaseLaunchForce + (Mathf.Abs(RotationSpeed) * LaunchMultiplier);
         PlayerRigidBody.AddForce(launchVector * launchForce);
     }
 
@@ -93,13 +95,22 @@ public class Player : MonoBehaviour
 
         if (PlayerGrapple.IsDrawingGrapple)
         {
-            //PlayerGrapple.IsDrawingGrapple = false;
             PlayerGrapple.StopDrawThenSetGrapple();
             PlayerGrapple.DisableLineRenderer();
         }
 
-        RotationSpeed = VelocityBeforeCollision.magnitude * RotationSpeedMultiplier;
         NodeTransform = collider.gameObject.transform;
+
+        // get rotation dir
+        Vector2 playerAngle = VelocityBeforeCollision.normalized;
+        Vector2 circleAngle = CalculateLaunchVector().normalized;
+
+        float dotProduct = Vector2.Dot(playerAngle, circleAngle);
+        float determinant = playerAngle.x * circleAngle.y + playerAngle.y * circleAngle.x;
+
+        var rotationDir = Mathf.Sign(Mathf.Atan2(determinant, dotProduct)) * -1;
+
+        RotationSpeed = (VelocityBeforeCollision.magnitude * RotationSpeedMultiplier) * rotationDir;
 
         var playerVector = NodeTransform.InverseTransformPoint(PlayerRigidBody.transform.position);
         Angle = Mathf.Deg2Rad * Angle360(playerVector, Vector2.up);
