@@ -1,0 +1,100 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    public float RotationSpeed = 0f;
+    public float RotationSpeedMultiplier = 0.8f;
+    public float DecelerationAmount = 0.015f;
+    public float BaseLaunchForce = 200f;
+    public float LaunchMultiplier = 25f;
+    public Vector3 VelocityBeforeCollision;
+
+    // Radius must be a little bigger than the radius of the node
+    // because a collision will occur with the node you are launching off
+    // if they are the same size.
+    private float RotationRadius = 1.1f;
+    private float Angle = 0;
+    private Rigidbody2D PlayerRigidBody;
+    public Transform NodeTransform;
+
+    private void Awake()
+    {
+        PlayerRigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        VelocityBeforeCollision = PlayerRigidBody.velocity;
+    }
+
+    private void FixedUpdate()
+    {
+        if (NodeTransform != null)
+            RotateAroundNode();
+    }
+
+    private void RotateAroundNode()
+    {
+        if (!PlayerRigidBody.isKinematic)
+            PlayerRigidBody.velocity = Vector3.zero;
+            PlayerRigidBody.isKinematic = true;
+
+        Angle += RotationSpeed * Time.deltaTime;
+        if (RotationSpeed > 0)
+            RotationSpeed -= DecelerationAmount;
+        else if (RotationSpeed < 0)
+            RotationSpeed += DecelerationAmount;
+
+        var offset = new Vector3(Mathf.Sin(Angle), Mathf.Cos(Angle)) * RotationRadius;
+        PlayerRigidBody.transform.position = NodeTransform.position + offset;
+    }
+
+    public void StartRotation(Transform nodeTransform)
+    {
+        NodeTransform = nodeTransform;
+
+        Vector2 playerVelocity = VelocityBeforeCollision.normalized;
+        Vector2 fromNodeToPlayer = CalculateLaunchVector().normalized;
+
+        var rotationDir = CalculateRotationDirection(playerVelocity, fromNodeToPlayer);
+
+        RotationSpeed = (VelocityBeforeCollision.magnitude * RotationSpeedMultiplier) * rotationDir;
+
+        var playerVector = NodeTransform.InverseTransformPoint(PlayerRigidBody.transform.position);
+        Angle = Mathf.Deg2Rad * Angle360(playerVector, Vector2.up);
+    }
+
+    public void Launch()
+    {
+        Vector2 launchVector = CalculateLaunchVector().normalized;
+        NodeTransform = null;
+        PlayerRigidBody.isKinematic = false;
+        var launchForce = BaseLaunchForce + (Mathf.Abs(RotationSpeed) * LaunchMultiplier);
+        PlayerRigidBody.AddForce(launchVector * launchForce);
+    }
+
+    private Vector2 CalculateLaunchVector()
+    {
+        return PlayerRigidBody.transform.position - NodeTransform.position;
+    }
+
+    private static int CalculateRotationDirection(Vector2 vec1, Vector2 vec2)
+    {
+        vec1.Normalize();        
+        vec2.Normalize();        
+
+        float dotProduct = Vector2.Dot(vec1, vec2);
+        float determinant = vec1.x * vec2.y + vec1.y * vec2.x;
+
+        return (int)Mathf.Sign(Mathf.Atan2(determinant, dotProduct)) * -1;
+    }
+
+    // https://answers.unity.com/questions/1164731/need-help-getting-angles-to-work-in-360-degrees.html
+    public static float Angle360(Vector2 from, Vector2 to)
+    {
+        float angle = Vector2.SignedAngle(from, to);
+        return angle < 0 ? 360 - angle * -1 : angle;
+    }
+}
