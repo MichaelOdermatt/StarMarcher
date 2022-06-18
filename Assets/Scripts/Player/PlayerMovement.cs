@@ -82,13 +82,8 @@ public class PlayerMovement : MonoBehaviour
 
     private static int CalculateRotationDirection(Vector2 vec1, Vector2 vec2)
     {
-        vec1.Normalize();        
-        vec2.Normalize();        
-
-        float dotProduct = Vector2.Dot(vec1, vec2);
-        float determinant = vec1.x * vec2.y + vec1.y * vec2.x;
-
-        return (int)Mathf.Sign(Mathf.Atan2(determinant, dotProduct)) * -1;
+        var angle = Angle360(vec1, vec2);
+        return angle > 180 ? -1 : 1;
     }
 
     // https://answers.unity.com/questions/1164731/need-help-getting-angles-to-work-in-360-degrees.html
