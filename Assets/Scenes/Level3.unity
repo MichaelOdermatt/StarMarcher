@@ -251,6 +251,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8794081070398766265, guid: 171d2f299f072ad49b40fb7423eed413, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8794081070398766267, guid: 171d2f299f072ad49b40fb7423eed413, type: 3}
       propertyPath: m_Anchor.x
       value: 0
