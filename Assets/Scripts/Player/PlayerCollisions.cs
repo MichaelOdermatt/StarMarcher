@@ -13,8 +13,11 @@ public class PlayerCollisions : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Node"))
+        if (collision.collider.CompareTag("Node") 
+            || collision.collider.CompareTag("Node Non-Swingable"))
+        {
             CollisionWithNode(collision.collider);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

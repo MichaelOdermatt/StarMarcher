@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Objective
   - Node
+  - Node Non-Swingable
   layers:
   - Default
   - TransparentFX
