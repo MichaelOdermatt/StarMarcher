@@ -48,6 +48,7 @@ public class PlayerGrapple : MonoBehaviour
         if (hit == false 
             || hit.collider.gameObject == gameObject
             || hit.collider.CompareTag("Node Non-Swingable")
+            || hit.collider.CompareTag("Objective")
             || MinGrappleDistance >= Vector2.Distance(
                 hit.collider.transform.position, 
                 PlayerRigidBody.transform.position))
