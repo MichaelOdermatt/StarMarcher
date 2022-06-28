@@ -46,7 +46,8 @@ public class PlayerGrapple : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(clickLocation, Vector2.zero);
 
         CustomTag tags;
-        if (!hit.collider.TryGetComponent(out tags))
+        if (hit.collider == null
+            || !hit.collider.TryGetComponent(out tags))
             return;
 
         if (hit == false
