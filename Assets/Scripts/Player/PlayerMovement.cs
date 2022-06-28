@@ -75,6 +75,13 @@ public class PlayerMovement : MonoBehaviour
         PlayerRigidBody.AddForce(launchVector * launchForce);
     }
 
+    public void DisablePlayerMovement()
+    {
+        PlayerRigidBody.velocity = Vector2.zero;
+        PlayerRigidBody.angularVelocity = 0f;
+        PlayerRigidBody.isKinematic = true;
+    }
+
     private Vector2 CalculateLaunchVector()
     {
         return PlayerRigidBody.transform.position - NodeTransform.position;

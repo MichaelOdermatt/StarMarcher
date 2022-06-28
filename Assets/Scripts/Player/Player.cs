@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerCollisions))]
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(PlayerMovement))]
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Player : MonoBehaviour
 {
     private float NodeCollisionCameraShakeMagnitude = 0.025f;
@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
         PlayerCollisions = GetComponent<PlayerCollisions>();
         PlayerCollisions.CollisionWithNode += OnCollisionWithNode;
         PlayerCollisions.CollisionWithObjective += OnCollisionWithObjective;
+        PlayerCollisions.KillPlayer += OnDeath;
 
         PlayerInput = GetComponent<PlayerInput>();
         PlayerInput.clicked += OnClicked;
@@ -79,6 +80,16 @@ public class Player : MonoBehaviour
             else
                 PlayerGrapple.AttemptGrapple(clickLocation);
         }
+    }
+
+    private void OnDeath()
+    {
+        PlayerGrapple.IsEnabled = false;
+        PlayerGrapple.DisableLineRenderer();
+        PlayerMovement.DisablePlayerMovement();
+
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.enabled = false;
     }
 
 }
