@@ -10,7 +10,7 @@ using UnityEngine;
 [RequireComponent(typeof(HingeJoint2D))]
 public class PlayerGrapple : MonoBehaviour
 {
-    public float MinGrappleDistance = 1.1f;
+    public float MinGrappleDistance = 1.5f;
     public float GrappleSpeed = 7;
 
     /// <summary>
