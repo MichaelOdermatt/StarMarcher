@@ -84,12 +84,7 @@ public class Player : MonoBehaviour
 
     private void OnDeath()
     {
-        PlayerGrapple.IsEnabled = false;
-        PlayerGrapple.DisableLineRenderer();
-        PlayerMovement.DisablePlayerMovement();
-
-        var spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.enabled = false;
+        Destroy(gameObject);
     }
 
 }
