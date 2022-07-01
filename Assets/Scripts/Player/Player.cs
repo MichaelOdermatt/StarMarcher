@@ -4,7 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerCollisions))]
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(PlayerMovement))]
-[RequireComponent(typeof(SpriteRenderer))]
 public class Player : MonoBehaviour
 {
     private float NodeCollisionCameraShakeMagnitude = 0.025f;
