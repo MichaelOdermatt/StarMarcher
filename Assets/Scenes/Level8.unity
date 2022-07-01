@@ -178,17 +178,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8794081070398766266, guid: 171d2f299f072ad49b40fb7423eed413, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8794081070398766267, guid: 171d2f299f072ad49b40fb7423eed413, type: 3}
       propertyPath: m_EnableCollision
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8794081070398766267, guid: 171d2f299f072ad49b40fb7423eed413, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -3.92
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 8794081070398766267, guid: 171d2f299f072ad49b40fb7423eed413, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 4.05
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 171d2f299f072ad49b40fb7423eed413, type: 3}
