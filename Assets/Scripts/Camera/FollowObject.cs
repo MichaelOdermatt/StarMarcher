@@ -12,6 +12,9 @@ public class FollowObject : MonoBehaviour
 
     private void Update()
     {
+        if (Target == null)
+            return;
+
         float newXPos = transform.position.x;
         float newYPos = transform.position.y;
 
