@@ -33,8 +33,6 @@ public class PlayerCollisions : MonoBehaviour
     {
         Component component;
 
-        Debug.Log(collider);
-
         if (collider.TryGetComponent(typeof(Objective), out component))
             CollisionWithObjective(collider);
     }
