@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 
         PlayerCollisions = GetComponent<PlayerCollisions>();
         PlayerCollisions.CollisionWithNode += OnCollisionWithNode;
+        PlayerCollisions.CollisionWithNodeNonSwingable += OnCollisionWithNodeNonSwingable;
+        PlayerCollisions.ExitWithNodeNonSwingable += OnExitWithNodeNonSwingable;
         PlayerCollisions.CollisionWithObjective += OnCollisionWithObjective;
         PlayerCollisions.KillPlayer += OnDeath;
 
@@ -58,6 +60,20 @@ public class Player : MonoBehaviour
                 NodeCollisionCameraShakeMagnitude * PlayerMovement.VelocityBeforeCollision.magnitude;
             StartCoroutine(cameraShake.Shake(shakeMagnitude , NodeCollisionCameraShakeDuration));
         }
+    }
+
+    private void OnCollisionWithNodeNonSwingable(Component collider)
+    {
+        NodeNonSwingable node;
+        if (collider.gameObject.TryGetComponent(out node))
+            node.OnCollisionWithPlayer();
+    }
+
+    private void OnExitWithNodeNonSwingable(Component collider)
+    {
+        NodeNonSwingable node;
+        if (collider.gameObject.TryGetComponent(out node))
+            node.OnExitWithPlayer();
     }
 
     private void OnCollisionWithObjective(Collider2D collider)
