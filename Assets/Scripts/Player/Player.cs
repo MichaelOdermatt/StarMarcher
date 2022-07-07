@@ -23,8 +23,8 @@ public class Player : MonoBehaviour
 
         PlayerCollisions = GetComponent<PlayerCollisions>();
         PlayerCollisions.CollisionWithNode += OnCollisionWithNode;
-        PlayerCollisions.CollisionWithNodeNonSwingable += OnCollisionWithNodeNonSwingable;
-        PlayerCollisions.ExitWithNodeNonSwingable += OnExitWithNodeNonSwingable;
+        PlayerCollisions.CollisionWithNodeSwingOnly += OnCollisionWithNodeSwingOnly;
+        PlayerCollisions.ExitFromNodeSwingOnly += OnExitFromNodeSwingOnly;
         PlayerCollisions.CollisionWithObjective += OnCollisionWithObjective;
         PlayerCollisions.KillPlayer += OnDeath;
 
@@ -62,16 +62,16 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionWithNodeNonSwingable(Component collider)
+    private void OnCollisionWithNodeSwingOnly(Component collider)
     {
-        NodeNonSwingable node;
+        NodeSwingOnly node;
         if (collider.gameObject.TryGetComponent(out node))
             node.OnCollisionWithPlayer();
     }
 
-    private void OnExitWithNodeNonSwingable(Component collider)
+    private void OnExitFromNodeSwingOnly(Component collider)
     {
-        NodeNonSwingable node;
+        NodeSwingOnly node;
         if (collider.gameObject.TryGetComponent(out node))
             node.OnExitWithPlayer();
     }

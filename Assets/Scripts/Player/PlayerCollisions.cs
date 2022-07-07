@@ -10,8 +10,8 @@ public class PlayerCollisions : MonoBehaviour
 {
     public Action<Collider2D> CollisionWithObjective;
     public Action<Collider2D> CollisionWithNode;
-    public Action<Collider2D> CollisionWithNodeNonSwingable;
-    public Action<Collider2D> ExitWithNodeNonSwingable;
+    public Action<Collider2D> CollisionWithNodeSwingOnly;
+    public Action<Collider2D> ExitFromNodeSwingOnly;
     public Action KillPlayer;
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -40,23 +40,26 @@ public class PlayerCollisions : MonoBehaviour
             return;
         }
 
-        if (collider.gameObject.CompareTag("Node"))
-        {
-            CustomTag tags;
-            if (collider.gameObject.TryGetComponent(out tags))
-                if (!tags.Tags.HasFlag(CustomTag.TagTypes.Rotatable))
-                    CollisionWithNodeNonSwingable(collider);
-        }
+        if (IsNodeSwingOnly (collider.gameObject))
+            CollisionWithNodeSwingOnly(collider);
     }
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("Node"))
+        if (IsNodeSwingOnly(collider.gameObject))
+            ExitFromNodeSwingOnly(collider);
+    }
+
+    private bool IsNodeSwingOnly(GameObject gameObject)
+    {
+        if (gameObject.CompareTag("Node"))
         {
             CustomTag tags;
-            if (collider.gameObject.TryGetComponent(out tags))
+            if (gameObject.TryGetComponent(out tags))
                 if (!tags.Tags.HasFlag(CustomTag.TagTypes.Rotatable))
-                    ExitWithNodeNonSwingable(collider);
+                    return true;
         }
+
+        return false;
     }
 }
