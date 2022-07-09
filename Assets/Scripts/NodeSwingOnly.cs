@@ -5,6 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class NodeSwingOnly : MonoBehaviour
 {
+    private SpriteRenderer Renderer;
+
+    public void Awake()
+    {
+        Renderer = GetComponent<SpriteRenderer>();
+    }
+
     public void OnCollisionWithPlayer()
     {
         SetOpacity(0.5f);
@@ -17,9 +24,8 @@ public class NodeSwingOnly : MonoBehaviour
 
     private void SetOpacity(float alpha)
     {
-        var renderer = GetComponent<SpriteRenderer>();
-        var currentColor = renderer.color;
+        var currentColor = Renderer.color;
         currentColor.a = alpha;
-        renderer.color = currentColor;
+        Renderer.color = currentColor;
     }
 }
