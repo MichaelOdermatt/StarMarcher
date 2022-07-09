@@ -13,9 +13,13 @@ public class Player : MonoBehaviour
     private PlayerMovement PlayerMovement;
     private PlayerGrapple PlayerGrapple;
     private PlayerCollisions PlayerCollisions;
+    private PlayerKillFloor PlayerKillFloor;
 
     private void Awake()
     {
+        if (TryGetComponent(out PlayerKillFloor))
+            PlayerKillFloor.KillPlayer += OnDeath;
+
         PlayerMovement = GetComponent<PlayerMovement>();
 
         PlayerGrapple = GetComponent<PlayerGrapple>();
