@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // rename to CustomNodeTag, use this rather than the default node tag.
-public class CustomTag : MonoBehaviour
+public class CustomNodeTag : MonoBehaviour
 {
 
     [System.Flags]

@@ -45,14 +45,14 @@ public class PlayerGrapple : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(clickLocation, Vector2.zero);
 
-        CustomTag tags;
+        CustomNodeTag tags;
         if (hit.collider == null
             || !hit.collider.TryGetComponent(out tags))
             return;
 
         if (hit == false
             || hit.collider.gameObject == gameObject
-            || !tags.Tags.HasFlag(CustomTag.TagTypes.Swingable)
+            || !tags.Tags.HasFlag(CustomNodeTag.TagTypes.Swingable)
             || hit.collider.CompareTag("Objective")
             || MinGrappleDistance >= Vector2.Distance(
                 hit.collider.transform.position, 

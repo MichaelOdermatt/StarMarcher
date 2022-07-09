@@ -16,16 +16,16 @@ public class PlayerCollisions : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        CustomTag tags;
+        CustomNodeTag tags;
         if (!collision.collider.TryGetComponent(out tags))
             return;
 
-        //if (tags.Tags.HasFlag(CustomTag.TagTypes.Rotatable))
+        //if (tags.Tags.HasFlag(CustomNodeTag.TagTypes.Rotatable))
         //{
         //    CollisionWithNodeRotatable(collision.collider);
         //}
 
-        if (tags.Tags.HasFlag(CustomTag.TagTypes.KillsPlayerOnContact))
+        if (tags.Tags.HasFlag(CustomNodeTag.TagTypes.KillsPlayerOnContact))
         {
             KillPlayer();
         }
@@ -40,23 +40,23 @@ public class PlayerCollisions : MonoBehaviour
             return;
         }
 
-        CustomTag tags;
+        CustomNodeTag tags;
         if (!collider.TryGetComponent(out tags))
             return;
 
-        if (!tags.Tags.HasFlag(CustomTag.TagTypes.Rotatable))
+        if (!tags.Tags.HasFlag(CustomNodeTag.TagTypes.Rotatable))
             CollisionWithNodeSwingOnly(collider);
-        else if (tags.Tags.HasFlag(CustomTag.TagTypes.Rotatable))
+        else if (tags.Tags.HasFlag(CustomNodeTag.TagTypes.Rotatable))
             CollisionWithNodeRotatable(collider);
     }
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        CustomTag tags;
+        CustomNodeTag tags;
         if (!collider.TryGetComponent(out tags))
             return;
 
-        if (!tags.Tags.HasFlag(CustomTag.TagTypes.Rotatable))
+        if (!tags.Tags.HasFlag(CustomNodeTag.TagTypes.Rotatable))
             ExitFromNodeSwingOnly(collider);
     }
 }
