@@ -50,17 +50,16 @@ public class PlayerGrapple : MonoBehaviour
             || !hit.collider.TryGetComponent(out tags))
             return;
 
-        if (hit == false
-            || hit.collider.gameObject == gameObject
-            || !tags.Tags.HasFlag(CustomNodeTag.TagTypes.Swingable)
-            || hit.collider.CompareTag("Objective")
-            || MinGrappleDistance >= Vector2.Distance(
+        var distanceToNode = Vector2.Distance(
                 hit.collider.transform.position, 
-                PlayerRigidBody.transform.position))
-            return;
+                PlayerRigidBody.transform.position);
 
-        if (!IsDrawingGrapple)
+        if (!IsDrawingGrapple 
+            && tags.Tags.HasFlag(CustomNodeTag.TagTypes.Swingable)
+            && MinGrappleDistance <= distanceToNode)
+        {
             DrawThenSetGrappleCoroutine = StartCoroutine(DrawThenSetGrapple(hit.collider.gameObject.transform.position, hit));
+        }
     }
 
     public void RemoveHinge()

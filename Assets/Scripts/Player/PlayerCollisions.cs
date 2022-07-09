@@ -20,11 +20,6 @@ public class PlayerCollisions : MonoBehaviour
         if (!collision.collider.TryGetComponent(out tags))
             return;
 
-        //if (tags.Tags.HasFlag(CustomNodeTag.TagTypes.Rotatable))
-        //{
-        //    CollisionWithNodeRotatable(collision.collider);
-        //}
-
         if (tags.Tags.HasFlag(CustomNodeTag.TagTypes.KillsPlayerOnContact))
         {
             KillPlayer();
