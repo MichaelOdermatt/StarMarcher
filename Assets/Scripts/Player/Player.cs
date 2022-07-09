@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
         PlayerGrapple.IsEnabled = false;
 
         PlayerCollisions = GetComponent<PlayerCollisions>();
-        PlayerCollisions.CollisionWithNode += OnCollisionWithNode;
+        PlayerCollisions.CollisionWithNodeRotatable += OnCollisionWithNodeRotatable;
         PlayerCollisions.CollisionWithNodeSwingOnly += OnCollisionWithNodeSwingOnly;
         PlayerCollisions.ExitFromNodeSwingOnly += OnExitFromNodeSwingOnly;
         PlayerCollisions.CollisionWithObjective += OnCollisionWithObjective;
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
         PlayerGrapple.UpdateLine();
     }
 
-    private void OnCollisionWithNode(Component collider)
+    private void OnCollisionWithNodeRotatable(Component collider)
     {
         if (PlayerMovement.NodeTransform != null)
             return;

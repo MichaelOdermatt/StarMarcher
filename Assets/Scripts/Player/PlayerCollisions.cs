@@ -9,7 +9,7 @@ using UnityEngine;
 public class PlayerCollisions : MonoBehaviour
 {
     public Action<Collider2D> CollisionWithObjective;
-    public Action<Collider2D> CollisionWithNode;
+    public Action<Collider2D> CollisionWithNodeRotatable;
     public Action<Collider2D> CollisionWithNodeSwingOnly;
     public Action<Collider2D> ExitFromNodeSwingOnly;
     public Action KillPlayer;
@@ -20,10 +20,10 @@ public class PlayerCollisions : MonoBehaviour
         if (!collision.collider.TryGetComponent(out tags))
             return;
 
-        if (tags.Tags.HasFlag(CustomTag.TagTypes.Rotatable))
-        {
-            CollisionWithNode(collision.collider);
-        }
+        //if (tags.Tags.HasFlag(CustomTag.TagTypes.Rotatable))
+        //{
+        //    CollisionWithNodeRotatable(collision.collider);
+        //}
 
         if (tags.Tags.HasFlag(CustomTag.TagTypes.KillsPlayerOnContact))
         {
@@ -40,26 +40,23 @@ public class PlayerCollisions : MonoBehaviour
             return;
         }
 
-        if (IsNodeSwingOnly (collider.gameObject))
+        CustomTag tags;
+        if (!collider.TryGetComponent(out tags))
+            return;
+
+        if (!tags.Tags.HasFlag(CustomTag.TagTypes.Rotatable))
             CollisionWithNodeSwingOnly(collider);
+        else if (tags.Tags.HasFlag(CustomTag.TagTypes.Rotatable))
+            CollisionWithNodeRotatable(collider);
     }
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        if (IsNodeSwingOnly(collider.gameObject))
+        CustomTag tags;
+        if (!collider.TryGetComponent(out tags))
+            return;
+
+        if (!tags.Tags.HasFlag(CustomTag.TagTypes.Rotatable))
             ExitFromNodeSwingOnly(collider);
-    }
-
-    private bool IsNodeSwingOnly(GameObject gameObject)
-    {
-        if (gameObject.CompareTag("Node"))
-        {
-            CustomTag tags;
-            if (gameObject.TryGetComponent(out tags))
-                if (!tags.Tags.HasFlag(CustomTag.TagTypes.Rotatable))
-                    return true;
-        }
-
-        return false;
     }
 }
