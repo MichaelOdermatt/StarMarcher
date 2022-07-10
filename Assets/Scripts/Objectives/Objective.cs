@@ -10,6 +10,7 @@ public class Objective : MonoBehaviour
     // check if all the objectives are collected.
     public Action CheckObjectives;
     public SpriteRenderer SpriteRenderer;
+    public SpriteRenderer ShadowSpriteRenderer;
 
     public void Collect()
     {
@@ -18,6 +19,7 @@ public class Objective : MonoBehaviour
 
         IsCollected = true;
         SpriteRenderer.enabled = false;
+        ShadowSpriteRenderer.enabled = false;
 
         CheckObjectives();
     }

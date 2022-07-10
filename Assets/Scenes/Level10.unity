@@ -235,6 +235,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Node SwingOnly
       objectReference: {fileID: 0}
+    - target: {fileID: 9114868886805940702, guid: 9ae5881d5b69d3a4dbcf57fba61e9a66, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3cd6b85e7b813434884663490d5e1229, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ae5881d5b69d3a4dbcf57fba61e9a66, type: 3}
 --- !u!1001 &115117205
@@ -597,6 +601,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Node Non-Swingable
       objectReference: {fileID: 0}
+    - target: {fileID: 7206759502434808752, guid: c8be1cce48d8c2447924af5b69a85ad0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9384ed371a508994ba051da4a778096f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8be1cce48d8c2447924af5b69a85ad0, type: 3}
 --- !u!1001 &1354352657

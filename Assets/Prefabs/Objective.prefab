@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsCollected: 0
   SpriteRenderer: {fileID: 3257074020920144662}
+  ShadowSpriteRenderer: {fileID: 5684936530771549636}
 --- !u!58 &6383063311452696295
 CircleCollider2D:
   m_ObjectHideFlags: 0
