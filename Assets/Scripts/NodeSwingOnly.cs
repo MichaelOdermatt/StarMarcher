@@ -2,15 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class NodeSwingOnly : MonoBehaviour
 {
-    private SpriteRenderer Renderer;
-
-    public void Awake()
-    {
-        Renderer = GetComponent<SpriteRenderer>();
-    }
+    public SpriteRenderer Renderer;
 
     public void OnCollisionWithPlayer()
     {
