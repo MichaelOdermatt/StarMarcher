@@ -23,22 +23,19 @@ public class SpriteShadow : MonoBehaviour
 
         CasterSprite = GetComponent<SpriteRenderer>();
         ShadowSprite = ShadowTransform.gameObject.AddComponent<SpriteRenderer>();
-        ShadowSprite.drawMode = CasterSprite.drawMode;
-
+        ShadowSprite.sprite = CasterSprite.sprite;
         ShadowSprite.material = ShadowMaterial;
         ShadowSprite.sortingLayerName = CasterSprite.sortingLayerName;
         ShadowSprite.sortingOrder = CasterSprite.sortingOrder - 1;
+        ShadowSprite.drawMode = CasterSprite.drawMode;
+        ShadowSprite.size = CasterSprite.size;
     }
 
     private void LateUpdate()
     {
-        ShadowSprite.size = CasterSprite.size;
-
         ShadowTransform.position = new Vector2(
             CasterTransform.position.x + Offset.x,
             CasterTransform.position.y + Offset.y);
-
-        ShadowSprite.sprite = CasterSprite.sprite;
     }
 
 }
