@@ -132,7 +132,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -148,12 +148,12 @@ TextureImporter:
       name: startSpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 85
-        y: 196
-        width: 56
-        height: 56
+        x: 80
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -169,12 +169,12 @@ TextureImporter:
       name: startSpriteSheet_2
       rect:
         serializedVersion: 2
-        x: 169
-        y: 199
-        width: 48
-        height: 48
+        x: 161
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -190,12 +190,12 @@ TextureImporter:
       name: startSpriteSheet_3
       rect:
         serializedVersion: 2
-        x: 15
-        y: 140
-        width: 32
-        height: 32
+        x: 0
+        y: 124
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -211,12 +211,12 @@ TextureImporter:
       name: startSpriteSheet_4
       rect:
         serializedVersion: 2
-        x: 94
-        y: 135
-        width: 39
-        height: 39
+        x: 81
+        y: 124
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -232,12 +232,12 @@ TextureImporter:
       name: startSpriteSheet_5
       rect:
         serializedVersion: 2
-        x: 174
-        y: 133
-        width: 44
-        height: 44
+        x: 164
+        y: 124
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -253,12 +253,12 @@ TextureImporter:
       name: startSpriteSheet_6
       rect:
         serializedVersion: 2
-        x: 7
-        y: 65
-        width: 48
-        height: 48
+        x: 0
+        y: 57
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
