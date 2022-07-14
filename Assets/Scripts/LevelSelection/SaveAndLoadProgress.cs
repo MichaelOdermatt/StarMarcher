@@ -16,6 +16,7 @@ public static class SaveAndLoadProgress
         int completedLevelNumber = GetLevelNumber(levelName);
         int savedLevelNumber = GetLevelNumber(LoadCurrentLevel());
 
+        // perhaps I should just save the int rather than the whole level name.
         if (completedLevelNumber > savedLevelNumber)
             PlayerPrefs.SetString("CurrentLevel", levelName);
     }
