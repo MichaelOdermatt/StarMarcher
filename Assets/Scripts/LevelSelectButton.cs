@@ -11,9 +11,15 @@ public class LevelSelectButton : MonoBehaviour
     public LevelCompletionStatus CompletionStatus;
     private Image Image;
 
+    public string LevelName;
     public Sprite LevelCompletedTexture;
     public Sprite LevelNotCompletedTexture;
     public Sprite NextLevelTexture;
+
+    private void Awake()
+    {
+        LevelName = $"Level{LevelNumber}";
+    }
 
     public void Start()
     {
@@ -43,6 +49,6 @@ public class LevelSelectButton : MonoBehaviour
 
     public void OnClick()
     {
-        SceneManager.LoadScene($"Level{LevelNumber}");
+        SceneManager.LoadScene(LevelName);
     }
 }
