@@ -18,7 +18,7 @@ public class ObjectiveManager : MonoBehaviour
         LevelComplete = AreAllObjectivesCollected();
 
         if (LevelComplete)
-            SaveGame();
+            SaveAndLoadProgress.SaveGame();
     }
 
     public bool AreAllObjectivesCollected()
@@ -28,11 +28,5 @@ public class ObjectiveManager : MonoBehaviour
                 return false;
 
         return true;
-    }
-
-    private void SaveGame()
-    {
-        string levelName = SceneManager.GetActiveScene().name;
-        PlayerPrefs.SetString("CurrentLevel", levelName);
     }
 }
