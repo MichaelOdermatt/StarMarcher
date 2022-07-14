@@ -148,7 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelNumber: 1
-  CompletionStatus: 0
+  CompletionStatus: 1
+  LevelName: 
   LevelCompletedTexture: {fileID: 21300000, guid: d156e39a5e5aae34cb559d076b5365d1, type: 3}
   LevelNotCompletedTexture: {fileID: 21300000, guid: c8e879de8ee98d84d99fe2ba94d3e9dc, type: 3}
   NextLevelTexture: {fileID: 21300000, guid: 17cd8d63d8b3b9247aa4af22df95a3a6, type: 3}

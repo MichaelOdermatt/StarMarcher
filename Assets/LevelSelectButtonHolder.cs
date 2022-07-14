@@ -1,33 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class LevelSelectButtonHolder : MonoBehaviour
 {
     public List<LevelSelectButton> levelSelectButtons = new List<LevelSelectButton>();
-    private string CurrentLevelName;
+    private string CompletedLevelName;
 
     void Start()
     {
-        CurrentLevelName = PlayerPrefs.GetString("CurrentLevel", "Level1");
-
-        bool isCurrentLevelFound = false;
+        CompletedLevelName = PlayerPrefs.GetString("CurrentLevel", "Level1");
+        int CompletedLevelNumber = GetLevelNumber(CompletedLevelName);
+        int nextLevelNumber = CompletedLevelNumber + 1;
 
         for (int i = 0; i < levelSelectButtons.Count - 1; i++)
         {
-            if (CurrentLevelName == levelSelectButtons[i].LevelName)
-            {
-                isCurrentLevelFound = true;
+            if (levelSelectButtons[i].LevelNumber < nextLevelNumber)
                 levelSelectButtons[i].CompletionStatus = LevelCompletionStatus.Completed;
-                levelSelectButtons[i + 1].CompletionStatus = LevelCompletionStatus.NextLevel;
-                i++;
-                continue;
-            }
-
-            if (isCurrentLevelFound)
+            else if (levelSelectButtons[i].LevelNumber == nextLevelNumber)
+                levelSelectButtons[i].CompletionStatus = LevelCompletionStatus.NextLevel;
+            else if (levelSelectButtons[i].LevelNumber > nextLevelNumber)
                 levelSelectButtons[i].CompletionStatus = LevelCompletionStatus.NotCompleted;
-            else
-                levelSelectButtons[i].CompletionStatus = LevelCompletionStatus.Completed;
         }
+    }
+
+    private int GetLevelNumber(string levelName)
+    {
+        Regex pattern = new Regex(@"[0-9]+");
+        string numbers = pattern.Match(levelName).Groups[0].Value;
+        Int32.TryParse(numbers, out int levelNumber);
+
+        return levelNumber;
     }
 }
