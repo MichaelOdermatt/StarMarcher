@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObjectiveManager : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class ObjectiveManager : MonoBehaviour
     public void CheckObjectives()
     {
         LevelComplete = AreAllObjectivesCollected();
+
+        if (LevelComplete)
+            SaveGame();
     }
 
     public bool AreAllObjectivesCollected()
@@ -24,5 +28,11 @@ public class ObjectiveManager : MonoBehaviour
                 return false;
 
         return true;
+    }
+
+    private void SaveGame()
+    {
+        string levelName = SceneManager.GetActiveScene().name;
+        PlayerPrefs.SetString("CurrentLevel", levelName);
     }
 }
