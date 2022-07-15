@@ -608,6 +608,10 @@ PrefabInstance:
       value: Objective Manager
       objectReference: {fileID: 0}
     - target: {fileID: 5029599987635342404, guid: 428df59611d86764d8e10495316761bd, type: 3}
+      propertyPath: LoadNextLevelButton
+      value: 
+      objectReference: {fileID: 1959938060648249754}
+    - target: {fileID: 5029599987635342404, guid: 428df59611d86764d8e10495316761bd, type: 3}
       propertyPath: Objectives.Array.size
       value: 1
       objectReference: {fileID: 0}

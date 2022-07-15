@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,6 +7,7 @@ public class ObjectiveManager : MonoBehaviour
 {
     public List<Objective> Objectives;
     public bool LevelComplete = false;
+    public LoadNextLevelButton LoadNextLevelButton;
 
     private void Awake()
     {
@@ -18,7 +20,10 @@ public class ObjectiveManager : MonoBehaviour
         LevelComplete = AreAllObjectivesCollected();
 
         if (LevelComplete)
+        {
             SaveAndLoadProgress.SaveGame();
+            LoadNextLevelButton.ShowButton();
+        }
     }
 
     public bool AreAllObjectivesCollected()

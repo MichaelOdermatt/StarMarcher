@@ -232,6 +232,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9589dd77faebc4e469f9ba6ae9f47bf1, type: 3}
+--- !u!114 &263300380 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5198920114097142482, guid: 9589dd77faebc4e469f9ba6ae9f47bf1, type: 3}
+  m_PrefabInstance: {fileID: 263300379}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2748ce874e95e4c9e1184ff5cdb868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &266094449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -416,7 +427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3795186454604954381, guid: c8be1cce48d8c2447924af5b69a85ad0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3795186454604954381, guid: c8be1cce48d8c2447924af5b69a85ad0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -473,7 +484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6383063311452696289, guid: 732623646f9d7014cbe51fa659976500, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6383063311452696289, guid: 732623646f9d7014cbe51fa659976500, type: 3}
       propertyPath: m_LocalPosition.y
@@ -621,6 +632,10 @@ PrefabInstance:
       value: Objective Manager
       objectReference: {fileID: 0}
     - target: {fileID: 5029599987635342404, guid: 428df59611d86764d8e10495316761bd, type: 3}
+      propertyPath: LoadNextLevelButton
+      value: 
+      objectReference: {fileID: 263300380}
+    - target: {fileID: 5029599987635342404, guid: 428df59611d86764d8e10495316761bd, type: 3}
       propertyPath: Objectives.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -696,7 +711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3795186454604954381, guid: c8be1cce48d8c2447924af5b69a85ad0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3795186454604954381, guid: c8be1cce48d8c2447924af5b69a85ad0, type: 3}
       propertyPath: m_LocalPosition.z
