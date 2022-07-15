@@ -6,24 +6,23 @@ using UnityEngine.SceneManagement;
 public static class SaveAndLoadProgress
 {
     /// <summary>
-    /// Saves the current scene as a marker for how far the player has progressed.
-    /// If the current scene's level number is less than the previously saved one (i.e. you are replaying a level),
-    /// the current scene's level wont be saved.
+    /// Saves the active scene as a marker for how far the player has progressed.
+    /// If the active scene's level number is less than the previously saved one (i.e. you are replaying a level),
+    /// the active scene's level wont be saved.
     /// </summary>
     public static void SaveGame()
     {
         string levelName = SceneManager.GetActiveScene().name;
         int completedLevelNumber = GetLevelNumber(levelName);
-        int savedLevelNumber = GetLevelNumber(LoadCurrentLevel());
+        int savedLevelNumber = LoadCurrentLevel();
 
-        // perhaps I should just save the int rather than the whole level name.
         if (completedLevelNumber > savedLevelNumber)
-            PlayerPrefs.SetString("CurrentLevel", levelName);
+            PlayerPrefs.SetInt("CurrentLevel", completedLevelNumber);
     }
 
-    public static string LoadCurrentLevel()
+    public static int LoadCurrentLevel()
     {
-        return PlayerPrefs.GetString("CurrentLevel", "Level1");
+        return PlayerPrefs.GetInt("CurrentLevel", 0);
     }
 
     public static int GetLevelNumber(string levelName)

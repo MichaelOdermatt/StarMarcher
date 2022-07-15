@@ -7,8 +7,7 @@ public class LevelSelectButtonHolder : MonoBehaviour
 
     void Start()
     {
-        string completedLevelName = SaveAndLoadProgress.LoadCurrentLevel();
-        int CompletedLevelNumber = SaveAndLoadProgress.GetLevelNumber(completedLevelName);
+        int CompletedLevelNumber = SaveAndLoadProgress.LoadCurrentLevel();
         int nextLevelNumber = CompletedLevelNumber + 1;
 
         for (int i = 0; i < levelSelectButtons.Count - 1; i++)
