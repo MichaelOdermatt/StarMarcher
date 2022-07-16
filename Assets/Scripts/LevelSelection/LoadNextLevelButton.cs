@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,9 +8,11 @@ public class LoadNextLevelButton : MonoBehaviour
 {
     public Image Image;
     public Button Button;
+    private SceneNav SceneNav;
 
     public void Awake()
     {
+        SceneNav = new SceneNav();
         Image = GetComponent<Image>();
         Button = GetComponent<Button>();
 
@@ -32,7 +32,6 @@ public class LoadNextLevelButton : MonoBehaviour
         int levelNumber = SaveAndLoadProgress.GetLevelNumber(levelName);
         string nextLevelName = $"Level{levelNumber + 1}";
 
-        if (Application.CanStreamedLevelBeLoaded(nextLevelName))
-            SceneManager.LoadScene(nextLevelName);
+        SceneNav.LoadScene(nextLevelName);
     }
 }

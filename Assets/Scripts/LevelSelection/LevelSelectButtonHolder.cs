@@ -7,17 +7,20 @@ public class LevelSelectButtonHolder : MonoBehaviour
 
     void Start()
     {
-        int CompletedLevelNumber = SaveAndLoadProgress.LoadCurrentLevel();
+        int CompletedLevelNumber = SaveAndLoadProgress.LoadCurrentLevelNumber();
         int nextLevelNumber = CompletedLevelNumber + 1;
 
-        for (int i = 0; i < levelSelectButtons.Count - 1; i++)
+        for (int i = 0; i < levelSelectButtons.Count; i++)
         {
+            Debug.Log(i);
             if (levelSelectButtons[i].LevelNumber < nextLevelNumber)
                 levelSelectButtons[i].CompletionStatus = LevelCompletionStatus.Completed;
             else if (levelSelectButtons[i].LevelNumber == nextLevelNumber)
                 levelSelectButtons[i].CompletionStatus = LevelCompletionStatus.NextLevel;
             else if (levelSelectButtons[i].LevelNumber > nextLevelNumber)
                 levelSelectButtons[i].CompletionStatus = LevelCompletionStatus.NotCompleted;
+
+            levelSelectButtons[i].InitializeButton();
         }
     }
 }

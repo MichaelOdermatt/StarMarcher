@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
@@ -10,22 +9,25 @@ public class LevelSelectButton : MonoBehaviour
     public int LevelNumber;
     public LevelCompletionStatus CompletionStatus;
     private Image Image;
+    private Button Button;
+    private SceneNav SceneNav;
+    private string LevelName;
 
-    public string LevelName;
     public Sprite LevelCompletedTexture;
     public Sprite LevelNotCompletedTexture;
     public Sprite NextLevelTexture;
 
     private void Awake()
     {
+        Button = GetComponent<Button>();
+        Image = GetComponent<Image>();
+        SceneNav = new SceneNav();
         LevelName = $"Level{LevelNumber}";
     }
 
-    public void Start()
+    public void InitializeButton()
     {
-        Button button = GetComponent<Button>();
         Shadow shadow;
-        Image = GetComponent<Image>();
 
         switch (CompletionStatus)
         {
@@ -35,13 +37,13 @@ public class LevelSelectButton : MonoBehaviour
                 break;
             case LevelCompletionStatus.NotCompleted:
                 Image.sprite = LevelNotCompletedTexture;
-                button.enabled = false;
+                Button.enabled = false;
                 if (TryGetComponent(out shadow))
                     shadow.enabled = false;
 
                 break;
             case LevelCompletionStatus.NextLevel:
-                Image.sprite  = NextLevelTexture;
+                Image.sprite = NextLevelTexture;
 
                 break;
         }
@@ -49,6 +51,6 @@ public class LevelSelectButton : MonoBehaviour
 
     public void OnClick()
     {
-        SceneManager.LoadScene(LevelName);
+        SceneNav.LoadScene(LevelName);
     }
 }

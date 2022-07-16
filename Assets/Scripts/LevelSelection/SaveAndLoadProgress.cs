@@ -14,13 +14,13 @@ public static class SaveAndLoadProgress
     {
         string levelName = SceneManager.GetActiveScene().name;
         int completedLevelNumber = GetLevelNumber(levelName);
-        int savedLevelNumber = LoadCurrentLevel();
+        int savedLevelNumber = LoadCurrentLevelNumber();
 
         if (completedLevelNumber > savedLevelNumber)
             PlayerPrefs.SetInt("CurrentLevel", completedLevelNumber);
     }
 
-    public static int LoadCurrentLevel()
+    public static int LoadCurrentLevelNumber()
     {
         return PlayerPrefs.GetInt("CurrentLevel", 0);
     }
