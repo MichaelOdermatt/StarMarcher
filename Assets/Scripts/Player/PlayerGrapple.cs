@@ -28,7 +28,15 @@ public class PlayerGrapple : MonoBehaviour
     /// <summary>
     /// Enables or disables the HingeJoint2D component.
     /// </summary>
-    public bool IsEnabled { get => Hinge.enabled; set => Hinge.enabled = value; }
+    public bool IsEnabled
+    {
+        get => Hinge.enabled;
+        set
+        {
+            if (Hinge != null)
+                Hinge.enabled = value;
+        }
+    }
 
     private void Awake()
     {
