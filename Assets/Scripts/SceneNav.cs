@@ -17,6 +17,12 @@ public class SceneNav : MonoBehaviour
         LoadScene(levelName);
     }
 
+    public void CloseGame()
+    {
+        Debug.Log("Game closed");
+        Application.Quit();
+    }
+
     public void LoadScene(string sceneName)
     {
         if (Application.CanStreamedLevelBeLoaded(sceneName))
