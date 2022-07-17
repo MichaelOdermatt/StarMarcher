@@ -20,6 +20,10 @@ public class SceneNav : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         if (Application.CanStreamedLevelBeLoaded(sceneName))
+        {
             SceneManager.LoadScene(sceneName);
+            Debug.Log("Level loaded");
+
+        }
     }
 }
