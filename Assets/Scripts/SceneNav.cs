@@ -26,10 +26,16 @@ public class SceneNav : MonoBehaviour
     {
         if (Application.CanStreamedLevelBeLoaded(sceneName))
             SceneManager.LoadScene(sceneName);
+
+        // unpause the game in case it was previously paused
+        PausGameManager.UnpauseGame();
     }
     
     public void ResetCurrentScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        // unpause the game in case it was previously paused
+        PausGameManager.UnpauseGame();
     }
 }

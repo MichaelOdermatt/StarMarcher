@@ -8,7 +8,14 @@ public class HamburgerButton : MonoBehaviour
 
     public void ToggleMenu()
     {
-        if (Menu != null)
-            Menu.SetActive(!Menu.activeSelf);
+        if (Menu == null)
+            return;
+
+        Menu.SetActive(!Menu.activeSelf);
+
+        if (Menu.activeSelf == true)
+            PausGameManager.PauseGame();
+        else
+            PausGameManager.UnpauseGame();
     }
 }
