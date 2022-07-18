@@ -28,7 +28,6 @@ public class SceneNav : MonoBehaviour
             SceneManager.LoadScene(sceneName);
     }
     
-    // TODO remove the function of the same name from the main camera prefab.
     public void ResetCurrentScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

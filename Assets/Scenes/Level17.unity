@@ -635,7 +635,7 @@ PrefabInstance:
     - target: {fileID: 1959938061733814285, guid: 9589dd77faebc4e469f9ba6ae9f47bf1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1232099814}
+      objectReference: {fileID: 1057892447}
     - target: {fileID: 1959938061733814285, guid: 9589dd77faebc4e469f9ba6ae9f47bf1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ResetCurrentScene
@@ -651,6 +651,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c2748ce874e95e4c9e1184ff5cdb868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1057892447 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5857392342692367686, guid: 9589dd77faebc4e469f9ba6ae9f47bf1, type: 3}
+  m_PrefabInstance: {fileID: 1057892445}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9dc134f1dc667a439fdcbc25357f5e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1218119169
@@ -780,17 +791,6 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 3082409251588202748, guid: fdba562854a992840a84cde4c59cffe5, type: 3}
   m_PrefabInstance: {fileID: 1232099812}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1232099814 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -6970177907360755965, guid: fdba562854a992840a84cde4c59cffe5, type: 3}
-  m_PrefabInstance: {fileID: 1232099812}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d172d64c69d532e43821ad7841b1e2cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1236969393 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8794081070398766215, guid: 171d2f299f072ad49b40fb7423eed413, type: 3}

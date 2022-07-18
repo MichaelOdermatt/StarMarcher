@@ -376,17 +376,6 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 3082409251588202748, guid: fdba562854a992840a84cde4c59cffe5, type: 3}
   m_PrefabInstance: {fileID: 503356186}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &503356188 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -6970177907360755965, guid: fdba562854a992840a84cde4c59cffe5, type: 3}
-  m_PrefabInstance: {fileID: 503356186}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d172d64c69d532e43821ad7841b1e2cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &645934514 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5029599987635342405, guid: 428df59611d86764d8e10495316761bd, type: 3}
@@ -620,7 +609,7 @@ PrefabInstance:
     - target: {fileID: 1959938061733814285, guid: 9589dd77faebc4e469f9ba6ae9f47bf1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 503356188}
+      objectReference: {fileID: 903728403}
     - target: {fileID: 1959938061733814285, guid: 9589dd77faebc4e469f9ba6ae9f47bf1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ResetCurrentScene
@@ -636,6 +625,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c2748ce874e95e4c9e1184ff5cdb868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &903728403 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5857392342692367686, guid: 9589dd77faebc4e469f9ba6ae9f47bf1, type: 3}
+  m_PrefabInstance: {fileID: 903728401}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9dc134f1dc667a439fdcbc25357f5e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1939123898
