@@ -53,10 +53,15 @@ public class PlayerGrapple : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(clickLocation, Vector2.zero);
 
-        CustomNodeTag tags;
-        if (hit.collider == null
-            || !hit.collider.TryGetComponent(out tags))
+        if (hit.collider == null)
             return;
+
+        CustomNodeTag tags;
+        if (!hit.collider.TryGetComponent(out tags)
+            && !hit.collider.gameObject.transform.parent.TryGetComponent(out tags))
+        {
+            return;
+        }
 
         var distanceToNode = Vector2.Distance(
                 hit.collider.transform.position, 

@@ -5,10 +5,12 @@ using UnityEngine;
 public class DrawDottedElipse : MonoBehaviour
 {
     public LineRenderer circleRenderer;
+    public int Steps = 100;
+    public int Radius = 1;
 
     private void Start()
     {
-        DrawCircle(100, 1);
+        DrawCircle(Steps, Radius);
         float width = circleRenderer.startWidth;
         circleRenderer.material.mainTextureScale = new Vector2(1f / width, 1.0f);
     }
