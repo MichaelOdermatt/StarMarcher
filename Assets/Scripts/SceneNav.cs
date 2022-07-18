@@ -19,17 +19,18 @@ public class SceneNav : MonoBehaviour
 
     public void CloseGame()
     {
-        Debug.Log("Game closed");
         Application.Quit();
     }
 
     public void LoadScene(string sceneName)
     {
         if (Application.CanStreamedLevelBeLoaded(sceneName))
-        {
             SceneManager.LoadScene(sceneName);
-            Debug.Log("Level loaded");
-
-        }
+    }
+    
+    // TODO remove the function of the same name from the main camera prefab.
+    public void ResetCurrentScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

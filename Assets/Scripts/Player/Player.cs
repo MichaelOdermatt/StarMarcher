@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerGrapple))]
 [RequireComponent(typeof(PlayerCollisions))]
@@ -14,9 +15,12 @@ public class Player : MonoBehaviour
     private PlayerGrapple PlayerGrapple;
     private PlayerCollisions PlayerCollisions;
     private PlayerKillFloor PlayerKillFloor;
+    private SceneNav SceneNav;
 
     private void Awake()
     {
+        SceneNav = new SceneNav();
+
         if (TryGetComponent(out PlayerKillFloor))
             PlayerKillFloor.KillPlayer += OnDeath;
 
@@ -34,6 +38,7 @@ public class Player : MonoBehaviour
 
         PlayerInput = GetComponent<PlayerInput>();
         PlayerInput.clicked += OnClicked;
+        PlayerInput.ResetScenePressed += OnResetScenePressed;
     }
 
     private void Update()
@@ -104,6 +109,13 @@ public class Player : MonoBehaviour
     private void OnDeath()
     {
         Destroy(gameObject);
+    }
+
+    private void OnResetScenePressed()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name.Substring(0, 5) == "Level")
+            SceneNav.ResetCurrentScene();
     }
 
 }

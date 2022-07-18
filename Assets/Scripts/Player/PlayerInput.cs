@@ -10,6 +10,7 @@ public class PlayerInput : MonoBehaviour
 {
     private Camera Camera;
     public Action<Vector3> clicked;
+    public Action ResetScenePressed;
 
     private void Awake()
     {
@@ -20,5 +21,8 @@ public class PlayerInput : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
             clicked(Camera.ScreenToWorldPoint(Input.mousePosition));
+
+        if (Input.GetButtonDown("ResetScene"))
+            ResetScenePressed();
     }
 }
