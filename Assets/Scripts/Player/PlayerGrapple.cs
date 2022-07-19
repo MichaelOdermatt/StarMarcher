@@ -18,6 +18,7 @@ public class PlayerGrapple : MonoBehaviour
     /// then setting the hinge.
     /// </summary>
     public bool IsDrawingGrapple = false;
+    public ParticleSystem ParticleSystem;
 
     private Coroutine DrawThenSetGrappleCoroutine;
 
@@ -106,6 +107,7 @@ public class PlayerGrapple : MonoBehaviour
 
         LineRenderer.SetPosition(1, point);
         SetHinge(hit.collider.gameObject);
+        PlayGrappleParticle(point);
 
         IsDrawingGrapple = false;
     }
@@ -123,6 +125,15 @@ public class PlayerGrapple : MonoBehaviour
     {
         if (LineRenderer.enabled)
             LineRenderer.SetPosition(0, PlayerRigidBody.transform.position);
+    }
+
+    private void PlayGrappleParticle(Vector3 position)
+    {
+        if (ParticleSystem != null)
+        {
+            ParticleSystem.transform.position = position;
+            ParticleSystem.Play();
+        }
     }
 
     /// <summary>
