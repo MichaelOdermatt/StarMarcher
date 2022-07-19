@@ -18,7 +18,7 @@ public class PlayerGrapple : MonoBehaviour
     /// then setting the hinge.
     /// </summary>
     public bool IsDrawingGrapple = false;
-    public ParticleSystem ParticleSystem;
+    public ParticleSystem GrappleParticleSystem;
 
     private Coroutine DrawThenSetGrappleCoroutine;
 
@@ -129,10 +129,10 @@ public class PlayerGrapple : MonoBehaviour
 
     private void PlayGrappleParticle(Vector3 position)
     {
-        if (ParticleSystem != null)
+        if (GrappleParticleSystem != null)
         {
-            ParticleSystem.transform.position = position;
-            ParticleSystem.Play();
+            GrappleParticleSystem.transform.position = position;
+            GrappleParticleSystem.Play();
         }
     }
 

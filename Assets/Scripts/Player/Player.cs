@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     private float NodeCollisionCameraShakeMagnitude = 0.025f;
     private float NodeCollisionCameraShakeDuration = 0.2f;
 
+    public ParticleSystem ExplosionParticleSystem;
+
     private PlayerInput PlayerInput;
     private PlayerMovement PlayerMovement;
     private PlayerGrapple PlayerGrapple;
@@ -108,7 +110,17 @@ public class Player : MonoBehaviour
 
     private void OnDeath()
     {
+        PlayExplosionParticleSystem();
         Destroy(gameObject);
+    }
+
+    private void PlayExplosionParticleSystem()
+    {
+        if (ExplosionParticleSystem != null)
+        {
+            ExplosionParticleSystem.transform.position = transform.position;
+            ExplosionParticleSystem.Play();
+        }
     }
 
     private void OnResetScenePressed()

@@ -269,6 +269,10 @@ PrefabInstance:
       propertyPath: ParticleSystem
       value: 
       objectReference: {fileID: 199453006}
+    - target: {fileID: 3393005100195730763, guid: 171d2f299f072ad49b40fb7423eed413, type: 3}
+      propertyPath: GrappleParticleSystem
+      value: 
+      objectReference: {fileID: 199453006}
     - target: {fileID: 8794081070398766213, guid: 171d2f299f072ad49b40fb7423eed413, type: 3}
       propertyPath: m_Name
       value: Player
