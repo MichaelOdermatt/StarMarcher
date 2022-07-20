@@ -12,9 +12,6 @@ TextureImporter:
       213: -7983746052427113202
     second: startSpriteSheet_2
   - first:
-      213: -4644289994590939078
-    second: startSpriteSheet_3
-  - first:
       213: 1935541433473615292
     second: startSpriteSheet_4
   - first:
@@ -23,6 +20,9 @@ TextureImporter:
   - first:
       213: 4532158436727644340
     second: startSpriteSheet_6
+  - first:
+      213: 2305218480173393870
+    second: startSpriteSheet_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -53,7 +53,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -63,8 +63,8 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 0
-  spriteMeshType: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -132,7 +132,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -148,12 +148,12 @@ TextureImporter:
       name: startSpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 80
+        x: 81
         y: 192
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -174,7 +174,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -187,36 +187,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: startSpriteSheet_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 124
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a38918e3bda2c8fb0800000000000000
-      internalID: -4644289994590939078
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: startSpriteSheet_4
       rect:
         serializedVersion: 2
-        x: 81
-        y: 124
+        x: 0
+        y: 123
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -232,12 +211,12 @@ TextureImporter:
       name: startSpriteSheet_5
       rect:
         serializedVersion: 2
-        x: 164
-        y: 124
+        x: 81
+        y: 123
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -253,12 +232,12 @@ TextureImporter:
       name: startSpriteSheet_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 57
+        x: 164
+        y: 123
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -266,6 +245,27 @@ TextureImporter:
       bones: []
       spriteID: 4b0e0f6f51675ee30800000000000000
       internalID: 4532158436727644340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: startSpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 57
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec7a6608ef7cdff10800000000000000
+      internalID: 2305218480173393870
       vertices: []
       indices: 
       edges: []
