@@ -20,8 +20,6 @@ public class PlayerGrapple : MonoBehaviour
     public bool IsDrawingGrapple = false;
     public ParticleSystem GrappleParticleSystem;
 
-    [SerializeField]
-    private AudioSource GrappleAttachSound;
     private Coroutine DrawThenSetGrappleCoroutine;
     private Rigidbody2D PlayerRigidBody;
     private LineRenderer LineRenderer;
@@ -109,7 +107,6 @@ public class PlayerGrapple : MonoBehaviour
         LineRenderer.SetPosition(1, point);
         SetHinge(hit.collider.gameObject);
         PlayGrappleParticle(point);
-        PlayGrappleAttachSound();
 
         IsDrawingGrapple = false;
     }
@@ -136,12 +133,6 @@ public class PlayerGrapple : MonoBehaviour
             GrappleParticleSystem.transform.position = position;
             GrappleParticleSystem.Play();
         }
-    }
-
-    private void PlayGrappleAttachSound()
-    {
-        if (GrappleAttachSound != null)
-            GrappleAttachSound.Play();
     }
 
     /// <summary>
