@@ -1,2 +1,2 @@
-# Breadth_Bound
- A simple game where you are limited to moving only along the edges of shapes.
+# Star_Marcher
+ A simple game where you are a ship sailing through the stars.
