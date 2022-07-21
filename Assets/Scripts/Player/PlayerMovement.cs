@@ -17,7 +17,12 @@ public class PlayerMovement : MonoBehaviour
     private float RotationRadius = 1.1f;
     private float Angle = 0;
     private Rigidbody2D PlayerRigidBody;
-    public Transform NodeTransform;
+
+    /// <summary>
+    /// The transform of the node the player is rotating around, if null it means the
+    /// player is not attached to any nodes.
+    /// </summary>
+    public Transform AttachedNodeTransform { get; private set; }
 
     private void Awake()
     {
@@ -31,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (NodeTransform != null)
+        if (AttachedNodeTransform != null)
             RotateAroundNode();
     }
 
@@ -48,12 +53,12 @@ public class PlayerMovement : MonoBehaviour
             RotationSpeed += DecelerationAmount;
 
         var offset = new Vector3(Mathf.Sin(Angle), Mathf.Cos(Angle)) * RotationRadius;
-        PlayerRigidBody.transform.position = NodeTransform.position + offset;
+        PlayerRigidBody.transform.position = AttachedNodeTransform.position + offset;
     }
 
     public void StartRotation(Transform nodeTransform)
     {
-        NodeTransform = nodeTransform;
+        AttachedNodeTransform = nodeTransform;
 
         Vector2 playerVelocity = VelocityBeforeCollision.normalized;
         Vector2 fromNodeToPlayer = CalculateLaunchVector().normalized;
@@ -62,14 +67,14 @@ public class PlayerMovement : MonoBehaviour
 
         RotationSpeed = (VelocityBeforeCollision.magnitude * RotationSpeedMultiplier) * rotationDir;
 
-        var playerVector = NodeTransform.InverseTransformPoint(PlayerRigidBody.transform.position);
+        var playerVector = AttachedNodeTransform.InverseTransformPoint(PlayerRigidBody.transform.position);
         Angle = Mathf.Deg2Rad * Angle360(playerVector, Vector2.up);
     }
 
     public void Launch()
     {
         Vector2 launchVector = CalculateLaunchVector().normalized;
-        NodeTransform = null;
+        AttachedNodeTransform = null;
         PlayerRigidBody.isKinematic = false;
         var launchForce = BaseLaunchForce + (Mathf.Abs(RotationSpeed) * LaunchMultiplier);
         PlayerRigidBody.AddForce(launchVector * launchForce);
@@ -84,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 CalculateLaunchVector()
     {
-        return PlayerRigidBody.transform.position - NodeTransform.position;
+        return PlayerRigidBody.transform.position - AttachedNodeTransform.position;
     }
 
     private static int CalculateRotationDirection(Vector2 vec1, Vector2 vec2)

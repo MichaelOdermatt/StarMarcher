@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionWithNodeRotatable(Component collider)
     {
-        if (PlayerMovement.NodeTransform != null)
+        if (PlayerMovement.AttachedNodeTransform != null)
             return;
 
         if (PlayerGrapple.IsEnabled)
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
 
     private void OnClicked(Vector3 clickLocation)
     {
-        if (PlayerMovement.NodeTransform != null)
+        if (PlayerMovement.AttachedNodeTransform != null)
             PlayerMovement.Launch();
         else
         {

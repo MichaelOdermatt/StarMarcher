@@ -14,10 +14,9 @@ public class PlayerGrapple : MonoBehaviour
     public float GrappleSpeed = 7;
 
     /// <summary>
-    /// If true, the a coroutine is running which is drawing the grapple,
-    /// then setting the hinge.
+    /// If true, then a coroutine is running which is drawing the grapple.
     /// </summary>
-    public bool IsDrawingGrapple = false;
+    public bool IsDrawingGrapple { get; private set; } = false;
     public ParticleSystem GrappleParticleSystem;
 
     private Coroutine DrawThenSetGrappleCoroutine;
