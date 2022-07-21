@@ -52,27 +52,23 @@ public class PlayerGrapple : MonoBehaviour
     public void AttemptGrapple(Vector3 clickLocation)
     {
         RaycastHit2D hit = Physics2D.Raycast(clickLocation, Vector2.zero);
-
         if (hit.collider == null)
             return;
 
-        CustomNodeTag tags;
-        if (!hit.collider.TryGetComponent(out tags)
-            && !hit.collider.gameObject.transform.parent.TryGetComponent(out tags))
-        {
-            return;
-        }
+        GameObject node = hit.collider.gameObject;
+        CustomNodeTag tags = GetNodeTag(node);
 
         var distanceToNode = Vector2.Distance(
-                hit.collider.transform.position, 
+                node.transform.position, 
                 PlayerRigidBody.transform.position);
 
         if (!IsDrawingGrapple 
+            && tags != null
             && tags.Tags.HasFlag(CustomNodeTag.TagTypes.Swingable)
-            && MinGrappleDistance <= distanceToNode)
+            && distanceToNode >= MinGrappleDistance)
         {
             DrawThenSetGrappleCoroutine = StartCoroutine(
-                DrawThenSetGrapple(hit.collider.gameObject.transform.position));
+                DrawThenSetGrapple(node.transform.position));
         }
     }
 
@@ -116,7 +112,7 @@ public class PlayerGrapple : MonoBehaviour
     /// <summary>
     /// Stops the coroutine which draws and sets the grapple.
     /// </summary>
-    public void StopDrawThenSetGrapple()
+    public void StopDrawingThenSetGrapple()
     {
         StopCoroutine(DrawThenSetGrappleCoroutine);
         IsDrawingGrapple = false;
@@ -138,7 +134,24 @@ public class PlayerGrapple : MonoBehaviour
     }
 
     /// <summary>
-    /// It is reccomended that you use this rather than set LineRenderer.enabled = false.
+    /// Returns Null if GameObject does not have a CustomNodeTag component.
+    /// </summary>
+    private CustomNodeTag GetNodeTag(GameObject gameObject)
+    {
+        CustomNodeTag tags;
+
+        // we check if the objects parent has node tags too because of the dotted
+        // line game object that exists around swingable nodes.
+        if (gameObject.TryGetComponent(out tags)
+            || gameObject.transform.parent.TryGetComponent(out tags))
+        {
+            return tags;
+        } else
+            return null;
+    }
+
+    /// <summary>
+    /// It is recommended that you use this rather than set LineRenderer.enabled = false.
     /// </summary>
     public void DisableLineRenderer()
     {

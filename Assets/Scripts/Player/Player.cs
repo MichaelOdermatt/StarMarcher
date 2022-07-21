@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
 
         if (PlayerGrapple.IsDrawingGrapple)
         {
-            PlayerGrapple.StopDrawThenSetGrapple();
+            PlayerGrapple.StopDrawingThenSetGrapple();
             PlayerGrapple.DisableLineRenderer();
         }
 
