@@ -71,7 +71,8 @@ public class PlayerGrapple : MonoBehaviour
             && tags.Tags.HasFlag(CustomNodeTag.TagTypes.Swingable)
             && MinGrappleDistance <= distanceToNode)
         {
-            DrawThenSetGrappleCoroutine = StartCoroutine(DrawThenSetGrapple(hit.collider.gameObject.transform.position, hit));
+            DrawThenSetGrappleCoroutine = StartCoroutine(
+                DrawThenSetGrapple(hit.collider.gameObject.transform.position));
         }
     }
 
@@ -82,13 +83,14 @@ public class PlayerGrapple : MonoBehaviour
         Hinge.enabled = false;
     }
 
-    private void SetHinge(GameObject node)
+    private void SetHinge(Vector2 hingePos)
     {
         Hinge.enabled = true;
-        Hinge.anchor = PlayerRigidBody.transform.InverseTransformPoint(node.transform.position);
+        Hinge.anchor = PlayerRigidBody.transform.InverseTransformPoint(hingePos);
+        Hinge.connectedAnchor = hingePos;
     }
 
-    private IEnumerator DrawThenSetGrapple(Vector3 point, RaycastHit2D hit)
+    private IEnumerator DrawThenSetGrapple(Vector3 hingePos)
     {
         IsDrawingGrapple = true;
         LineRenderer.enabled = true;
@@ -98,15 +100,15 @@ public class PlayerGrapple : MonoBehaviour
 
         while (time < 1)
         {
-            LineRenderer.SetPosition(1, Vector3.Lerp(startPos, point, time));
+            LineRenderer.SetPosition(1, Vector3.Lerp(startPos, hingePos, time));
             time += GrappleSpeed * Time.deltaTime;
 
             yield return null;
         }
 
-        LineRenderer.SetPosition(1, point);
-        SetHinge(hit.collider.gameObject);
-        PlayGrappleParticle(point);
+        LineRenderer.SetPosition(1, hingePos);
+        SetHinge(hingePos);
+        PlayGrappleParticle(hingePos);
 
         IsDrawingGrapple = false;
     }
