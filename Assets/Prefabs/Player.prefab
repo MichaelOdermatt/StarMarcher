@@ -72,12 +72,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 5f6722206bdf03b409fe44509f55e5ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a93aa82949b6daa4790615a382682421, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.12, y: 1.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -183,12 +183,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.0023300648, y: 0.4533986}
-      - {x: -0.19074944, y: 0.13860644}
-      - {x: -0.48484853, y: -0.2485935}
-      - {x: -0.00030383468, y: -0.4674204}
-      - {x: 0.48029825, y: -0.2507239}
-      - {x: 0.19731814, y: 0.12846483}
+    - - {x: 0.000022185966, y: 0.38110387}
+      - {x: -0.13143326, y: 0.08921318}
+      - {x: -0.37535703, y: -0.23591712}
+      - {x: -0.00044661388, y: -0.4030079}
+      - {x: 0.3691557, y: -0.24517682}
+      - {x: 0.13170351, y: 0.0892324}
 --- !u!233 &8794081070398766267
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -338,7 +338,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinGrappleDistance: 1.5
   GrappleSpeed: 7
-  IsDrawingGrapple: 0
   GrappleParticleSystem: {fileID: 0}
 --- !u!114 &9031570360361257970
 MonoBehaviour:
@@ -382,4 +381,3 @@ MonoBehaviour:
   BaseLaunchForce: 200
   LaunchMultiplier: 25
   VelocityBeforeCollision: {x: 0, y: 0, z: 0}
-  NodeTransform: {fileID: 0}
