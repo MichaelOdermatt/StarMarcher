@@ -75,14 +75,14 @@ public class Player : MonoBehaviour
 
     private void OnCollisionWithNodeSwingOnly(Component collider)
     {
-        NodeSwingOnly node;
+        INodeInteractions node;
         if (collider.gameObject.TryGetComponent(out node))
             node.OnCollisionWithPlayer();
     }
 
     private void OnExitFromNodeSwingOnly(Component collider)
     {
-        NodeSwingOnly node;
+        INodeInteractions node;
         if (collider.gameObject.TryGetComponent(out node))
             node.OnExitWithPlayer();
     }

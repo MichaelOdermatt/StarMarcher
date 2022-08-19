@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NodeSwingOnly : MonoBehaviour
+public class NodeSwingOnly : MonoBehaviour, INodeInteractions
 {
     public SpriteRenderer Renderer;
 
