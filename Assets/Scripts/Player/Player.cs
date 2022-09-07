@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(PlayerCollisions))]
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerSounds))]
 public class Player : MonoBehaviour
 {
     private float NodeCollisionCameraShakeMagnitude = 0.025f;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     private PlayerMovement PlayerMovement;
     private PlayerGrapple PlayerGrapple;
     private PlayerCollisions PlayerCollisions;
+    private PlayerSounds PlayerSounds;
     private PlayerKillFloor PlayerKillFloor;
     private SceneNav SceneNav;
 
@@ -41,6 +43,8 @@ public class Player : MonoBehaviour
         PlayerInput = GetComponent<PlayerInput>();
         PlayerInput.clicked += OnClicked;
         PlayerInput.ResetScenePressed += OnResetScenePressed;
+
+        PlayerSounds = GetComponent<PlayerSounds>();
     }
 
     private void Update()
@@ -63,6 +67,7 @@ public class Player : MonoBehaviour
         }
 
         PlayerMovement.StartRotation(collider.gameObject.transform);
+        PlayerSounds.PlayImpact();
 
         var cameraShake = Camera.main.GetComponent<CameraShake>();
         if (cameraShake != null)
