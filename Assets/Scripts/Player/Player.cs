@@ -109,12 +109,14 @@ public class Player : MonoBehaviour
             if (PlayerGrapple.IsEnabled)
                 PlayerGrapple.RemoveHinge();
             else
-                PlayerGrapple.AttemptGrapple(clickLocation);
+                PlayerGrapple.AttemptGrapple(clickLocation, PlayerSounds.PlayLaunchGrapple);
         }
     }
 
     private void OnDeath()
     {
+        // doesn't work because player is imediatly destroyed
+        PlayerSounds.PlayDeath();
         PlayExplosionParticleSystem();
         Destroy(gameObject);
     }

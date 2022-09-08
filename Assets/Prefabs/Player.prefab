@@ -528,3 +528,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d4b4835bac6b1d342bcd708d2914ea77, type: 3}
   - {fileID: 8300000, guid: 925852bef31e3344082aa52f49b818e4, type: 3}
   - {fileID: 8300000, guid: 46d88bb13433620438de0f65647cae2d, type: 3}
+  LaunchGrappleSounds:
+  - {fileID: 8300000, guid: dc13cfac3c445864e839604657b85fa2, type: 3}
+  - {fileID: 8300000, guid: 7d39f41984a65df42bc16d63e5ca2041, type: 3}
+  - {fileID: 8300000, guid: 70ea9be5188feb94f9d0ea9b50ba0848, type: 3}
+  GrappleConnectSounds:
+  - {fileID: 8300000, guid: ce1f94bbcc6db4249bb7f1aa134b7b21, type: 3}
+  - {fileID: 8300000, guid: 25578eb90876ffd4d8f34cbb8155a195, type: 3}
+  - {fileID: 8300000, guid: 4ad46c7465d569647bfa520e132ce1b3, type: 3}
+  DeathSounds:
+  - {fileID: 8300000, guid: f6face1b1badf9a48a34d5e223a250c3, type: 3}
+  - {fileID: 8300000, guid: 4101e7fd6c6daf640bce33e499bca0ed, type: 3}
+  - {fileID: 8300000, guid: ec4b41db9ea25624fb0ef63aefeffc0d, type: 3}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,7 +49,7 @@ public class PlayerGrapple : MonoBehaviour
         Hinge.enabled = false;
     }
 
-    public void AttemptGrapple(Vector3 clickLocation)
+    public void AttemptGrapple(Vector3 clickLocation, Action launchGrappleSound = null)
     {
         RaycastHit2D hit = Physics2D.Raycast(clickLocation, Vector2.zero);
         if (hit.collider == null)
@@ -66,6 +67,8 @@ public class PlayerGrapple : MonoBehaviour
             && tags.Tags.HasFlag(CustomNodeTag.TagTypes.Swingable)
             && distanceToNode >= MinGrappleDistance)
         {
+            if (launchGrappleSound != null)
+                launchGrappleSound();
             DrawThenSetGrappleCoroutine = StartCoroutine(
                 DrawThenSetGrapple(node.transform.position));
         }

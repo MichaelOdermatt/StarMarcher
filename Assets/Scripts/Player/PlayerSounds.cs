@@ -7,7 +7,34 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField]
     private AudioSource AudioSource;
     public float volume = 0.5f;
-    public AudioClip[] ImpactSounds;
+    [SerializeField]
+    private AudioClip[] ImpactSounds;
+    [SerializeField]
+    private AudioClip[] LaunchGrappleSounds;
+    [SerializeField]
+    private AudioClip[] GrappleConnectSounds;
+    [SerializeField]
+    private AudioClip[] DeathSounds;
+
+    public void PlayLaunchGrapple() 
+    {
+        if (AudioSource == null || LaunchGrappleSounds.Length == 0)
+            return;
+
+        AudioClip launchGrappleSound = LaunchGrappleSounds[Random.Range(0, LaunchGrappleSounds.Length)]; ;
+        AudioSource.clip = launchGrappleSound;
+        AudioSource.Play();
+    }
+
+    public void PlayGrappleConnect() 
+    {
+        if (AudioSource == null || GrappleConnectSounds.Length == 0)
+            return;
+
+        AudioClip grappleConnectSound = GrappleConnectSounds[Random.Range(0, GrappleConnectSounds.Length)]; ;
+        AudioSource.clip = grappleConnectSound;
+        AudioSource.Play();
+    }
 
     public void PlayImpact() 
     {
@@ -16,6 +43,16 @@ public class PlayerSounds : MonoBehaviour
 
         AudioClip impactSound = ImpactSounds[Random.Range(0, ImpactSounds.Length)]; ;
         AudioSource.clip = impactSound;
+        AudioSource.Play();
+    }
+
+    public void PlayDeath() 
+    {
+        if (AudioSource == null || DeathSounds.Length == 0)
+            return;
+
+        AudioClip deathSound = DeathSounds[Random.Range(0, DeathSounds.Length)]; ;
+        AudioSource.clip = deathSound;
         AudioSource.Play();
     }
 }
