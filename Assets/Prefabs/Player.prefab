@@ -534,8 +534,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: aff10891a5f9ae642835b074ad15a63c, type: 3}
   ReleaseGrappleSounds:
   - {fileID: 8300000, guid: 194bbb32266bbca4d978dea959884b6b, type: 3}
-  - {fileID: 8300000, guid: 8ded6ea54d04d364eba8511f0a3411be, type: 3}
-  - {fileID: 8300000, guid: 226fd810e88c6cd40851163f3e873353, type: 3}
   GrappleConnectSounds:
   - {fileID: 8300000, guid: fb89e903c38d5734ab547ebfc20ee2ba, type: 3}
   - {fileID: 8300000, guid: 8d39200a239e1b54ea7607834ad22317, type: 3}
