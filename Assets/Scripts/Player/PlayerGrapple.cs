@@ -19,6 +19,7 @@ public class PlayerGrapple : MonoBehaviour
     /// </summary>
     public bool IsDrawingGrapple { get; private set; } = false;
     public ParticleSystem GrappleParticleSystem;
+    public Action ReleaseGrappleSound;
     public Action LaunchGrappleSound;
     public Action ConnectGrappleSound;
 
@@ -82,8 +83,8 @@ public class PlayerGrapple : MonoBehaviour
         DisableLineRenderer();
         Hinge.anchor = Vector2.zero;
         Hinge.enabled = false;
-        if (LaunchGrappleSound != null)
-            LaunchGrappleSound();
+        if (ReleaseGrappleSound != null)
+            ReleaseGrappleSound();
     }
 
     private void SetHinge(Vector2 hingePos)

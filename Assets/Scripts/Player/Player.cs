@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
 
         PlayerGrapple = GetComponent<PlayerGrapple>();
         PlayerGrapple.IsEnabled = false;
+        PlayerGrapple.ReleaseGrappleSound += PlayerSounds.PlayReleaseGrapple;
         PlayerGrapple.LaunchGrappleSound += PlayerSounds.PlayLaunchGrapple;
         PlayerGrapple.ConnectGrappleSound += PlayerSounds.PlayGrappleConnect;
 

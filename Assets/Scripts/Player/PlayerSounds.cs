@@ -12,6 +12,8 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField]
     private AudioClip[] LaunchGrappleSounds;
     [SerializeField]
+    private AudioClip[] ReleaseGrappleSounds;
+    [SerializeField]
     private AudioClip[] GrappleConnectSounds;
     [SerializeField]
     private AudioClip[] DeathSounds;
@@ -23,6 +25,16 @@ public class PlayerSounds : MonoBehaviour
 
         AudioClip launchGrappleSound = LaunchGrappleSounds[Random.Range(0, LaunchGrappleSounds.Length)]; ;
         AudioSource.clip = launchGrappleSound;
+        AudioSource.Play();
+    }
+
+    public void PlayReleaseGrapple() 
+    {
+        if (AudioSource == null || ReleaseGrappleSounds.Length == 0)
+            return;
+
+        AudioClip releaseGrappleSound = ReleaseGrappleSounds[Random.Range(0, ReleaseGrappleSounds.Length)]; ;
+        AudioSource.clip = releaseGrappleSound;
         AudioSource.Play();
     }
 

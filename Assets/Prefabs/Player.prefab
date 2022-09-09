@@ -525,13 +525,17 @@ MonoBehaviour:
   AudioSource: {fileID: 7533346358619311225}
   volume: 0.5
   ImpactSounds:
-  - {fileID: 8300000, guid: 3e5310ebf911c31428dac6d6004612ca, type: 3}
-  - {fileID: 8300000, guid: 1780cac304a8c52439fa4cfea0ad6956, type: 3}
-  - {fileID: 8300000, guid: aad2be3f9efcb2748907bf664910d014, type: 3}
+  - {fileID: 8300000, guid: fa24be55be1ad4f40891a6224f9a5da5, type: 3}
+  - {fileID: 8300000, guid: 2740ca78929238f4eb0b64f4216d90c4, type: 3}
+  - {fileID: 8300000, guid: d94eda855d9ea5b4dbe84f86ce718476, type: 3}
   LaunchGrappleSounds:
   - {fileID: 8300000, guid: 9a7ba454fc0560e45b7d9515828afbab, type: 3}
   - {fileID: 8300000, guid: dd79269fc6d25974d9b4dda7c801a133, type: 3}
   - {fileID: 8300000, guid: aff10891a5f9ae642835b074ad15a63c, type: 3}
+  ReleaseGrappleSounds:
+  - {fileID: 8300000, guid: 194bbb32266bbca4d978dea959884b6b, type: 3}
+  - {fileID: 8300000, guid: 8ded6ea54d04d364eba8511f0a3411be, type: 3}
+  - {fileID: 8300000, guid: 226fd810e88c6cd40851163f3e873353, type: 3}
   GrappleConnectSounds:
   - {fileID: 8300000, guid: fb89e903c38d5734ab547ebfc20ee2ba, type: 3}
   - {fileID: 8300000, guid: 8d39200a239e1b54ea7607834ad22317, type: 3}
