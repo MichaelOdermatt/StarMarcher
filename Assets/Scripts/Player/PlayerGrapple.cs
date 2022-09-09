@@ -82,6 +82,8 @@ public class PlayerGrapple : MonoBehaviour
         DisableLineRenderer();
         Hinge.anchor = Vector2.zero;
         Hinge.enabled = false;
+        if (LaunchGrappleSound != null)
+            LaunchGrappleSound();
     }
 
     private void SetHinge(Vector2 hingePos)
