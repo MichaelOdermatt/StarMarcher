@@ -19,6 +19,8 @@ public class PlayerGrapple : MonoBehaviour
     /// </summary>
     public bool IsDrawingGrapple { get; private set; } = false;
     public ParticleSystem GrappleParticleSystem;
+    public Action LaunchGrappleSound;
+    public Action ConnectGrappleSound;
 
     private Coroutine DrawThenSetGrappleCoroutine;
     private Rigidbody2D PlayerRigidBody;
@@ -49,7 +51,7 @@ public class PlayerGrapple : MonoBehaviour
         Hinge.enabled = false;
     }
 
-    public void AttemptGrapple(Vector3 clickLocation, Action launchGrappleSound = null)
+    public void AttemptGrapple(Vector3 clickLocation)
     {
         RaycastHit2D hit = Physics2D.Raycast(clickLocation, Vector2.zero);
         if (hit.collider == null)
@@ -67,8 +69,9 @@ public class PlayerGrapple : MonoBehaviour
             && tags.Tags.HasFlag(CustomNodeTag.TagTypes.Swingable)
             && distanceToNode >= MinGrappleDistance)
         {
-            if (launchGrappleSound != null)
-                launchGrappleSound();
+            if (LaunchGrappleSound != null)
+                LaunchGrappleSound();
+
             DrawThenSetGrappleCoroutine = StartCoroutine(
                 DrawThenSetGrapple(node.transform.position));
         }
@@ -107,6 +110,8 @@ public class PlayerGrapple : MonoBehaviour
         LineRenderer.SetPosition(1, hingePos);
         SetHinge(hingePos);
         PlayGrappleParticle(hingePos);
+        if (ConnectGrappleSound != null)
+            ConnectGrappleSound();
 
         IsDrawingGrapple = false;
     }

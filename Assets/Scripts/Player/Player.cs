@@ -28,10 +28,14 @@ public class Player : MonoBehaviour
         if (TryGetComponent(out PlayerKillFloor))
             PlayerKillFloor.KillPlayer += OnDeath;
 
+        PlayerSounds = GetComponent<PlayerSounds>();
+
         PlayerMovement = GetComponent<PlayerMovement>();
 
         PlayerGrapple = GetComponent<PlayerGrapple>();
         PlayerGrapple.IsEnabled = false;
+        PlayerGrapple.LaunchGrappleSound += PlayerSounds.PlayLaunchGrapple;
+        PlayerGrapple.ConnectGrappleSound += PlayerSounds.PlayGrappleConnect;
 
         PlayerCollisions = GetComponent<PlayerCollisions>();
         PlayerCollisions.CollisionWithNodeRotatable += OnCollisionWithNodeRotatable;
@@ -43,8 +47,6 @@ public class Player : MonoBehaviour
         PlayerInput = GetComponent<PlayerInput>();
         PlayerInput.clicked += OnClicked;
         PlayerInput.ResetScenePressed += OnResetScenePressed;
-
-        PlayerSounds = GetComponent<PlayerSounds>();
     }
 
     private void Update()
@@ -109,7 +111,7 @@ public class Player : MonoBehaviour
             if (PlayerGrapple.IsEnabled)
                 PlayerGrapple.RemoveHinge();
             else
-                PlayerGrapple.AttemptGrapple(clickLocation, PlayerSounds.PlayLaunchGrapple);
+                PlayerGrapple.AttemptGrapple(clickLocation);
         }
     }
 
